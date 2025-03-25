@@ -137,11 +137,16 @@ Przykładowe wyniki na analizatorze stanu
 
 ![obraz](https://hackmd.io/_uploads/BJmkDpK3yg.png)
 ## Zautomatyzowany układ sprawdzający na hali produkcyjnej
-![image](https://hackmd.io/_uploads/HJrJ3n32yl.png)
+![image](https://hackmd.io/_uploads/HkA6qolTJx.png)
+
+
+
 Generator słów wysyła odpowiedni sygnał wejściowy wraz z sygnałem wyjściowym, kolejno przechodząc przez wszystkie możliwe warianty.
 ![image](https://hackmd.io/_uploads/BkdZ3nn3Jg.png)
 Następnie wyniki są porównywane z wynikami układu testowanego za pomocą bramek XOR. Jeśli zostanie wykryty błąd, przerzutnik go zapisuje i wysyła sygnał do generatora słów, aby zatrzymać testowanie, jednocześnie zapalając na stałe czerwoną lampkę.
-![image](https://hackmd.io/_uploads/HyPxXclpJg.png)
+![image](https://hackmd.io/_uploads/B1Gn5olTke.png)
+
+
 
 
 
