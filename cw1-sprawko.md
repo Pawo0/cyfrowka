@@ -2,7 +2,6 @@
 title: Cw 1 Cyfrowka
 
 ---
-
 # Technika Cyfrowa -  Sprawozdanie z ćwiczenia nr 1
 
 ## Opis zadania
@@ -10,21 +9,25 @@ Bazując wyłącznie na bramkach NAND, proszę zaprojektować układ kombinacyjn
 ![cw1_1](https://hackmd.io/_uploads/B1EhF2F3Jl.png)
 
 ## Pomysł rozwiązania
-Pierwsze co możemy zauważyć to to, że wszystkie wyświetlane emotikony są symetryczne, więc do naszych obliczeń możemy uwzględnić tylko połowe układu.
-Następnie dla każdego możliwego wejścia trzybitowej liczby (czyli 8 możliwości) przypisujemy kolejny kolejne możliwe emotikony. Po czym każdego kolejnego piksela rozwiązujemy Tablice Karnaugh, aby poznać wzór na taki układ pikseli.
+Dla każdego możliwego wejścia trzybitowej liczby (czyli 8 możliwości) przypisujemy kolejny kolejne możliwe zestawy pikseli wyświetlających emotikony. Po czym każdego kolejnego piksela rozwiązujemy Tablice Karnaugh, aby poznać wzór na ten konkretny układ pikseli.
 
 ## Tabela pokazująca jak dla zadanego wejscia zachowywują się konkretne piksele
 (Numeracja pikseli kolumnowo)
-| A B C | 1/13 | 2/14 | 3/15 | 4/16 | 5/9 | 6/10 | 7/11 | 8/12 |
-|-------|------|------|------|------|-----|------|------|------|
-| 0 0 0 | 1    | 0    | 0    | 1    | 0   | 0    | 1    | 1    |
-| 0 0 1 | 1    | 0    | 0    | 1    | 0   | 0    | 1    | 0    |
-| 0 1 0 | 1    | 0    | 1    | 0    | 0   | 0    | 1    | 0    |
-| 0 1 1 | 1    | 0    | 0    | 0    | 0   | 0    | 1    | 0    |
-| 1 0 0 | 1    | 0    | 0    | 0    | 0   | 0    | 1    | 1    |
-| 1 0 1 | 1    | 0    | 0    | 0    | 0   | 0    | 0    | 1    |
-| 1 1 0 | 1    | 0    | 1    | 0    | 0   | 0    | 0    | 1    |
-| 1 1 1 | 1    | 0    | 1    | 0    | 0   | 0    | 1    | 1    |
+| ABC | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 |
+|-----|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|
+| 000 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0  | 1  | 1  | 1  | 0  | 0  | 1  |
+| 001 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0  | 1  | 0  | 1  | 0  | 0  | 1  |
+| 010 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0  | 1  | 0  | 1  | 0  | 1  | 0  |
+| 011 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0  | 1  | 0  | 1  | 0  | 0  | 0  |
+| 100 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0  | 1  | 1  | 1  | 0  | 0  | 0  |
+| 101 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0  | 0  | 1  | 1  | 0  | 0  | 0  |
+| 110 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0  | 0  | 1  | 1  | 0  | 1  | 0  |
+| 111 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 1 | 0 | 0  | 1  | 1  | 1  | 0  | 1  | 0  |
+
+
+Możemy zauważyć, że grupy pikseli 1-4 i 13-16 oraz 5-8 i 9-12 sa takie, co sugeruje nam, że zwracane emotikony są zawsze symetryczne wzgledem osi y. Więc przy dalszych obliczeniach, możemy rozwiązać jedną tablice dla pary pikseli.
+
+
 
 ## Tablice Karnaugh
 Dla każdego piksele szukamy formuły która go określa, a następnie przekształcamy wynik tak, żeby przedstawić go za pomocą samych bramek NAND
@@ -127,13 +130,18 @@ A + ((C nand C) nand (B nand B)) nand ((C nand C) nand (B nand B)) =
 
 
 ## Układ testujący
+Do układu załączyliśmy analizator stanu, więc możemy manualnie sprawdzić, czy dla konkretnych wejsc, wyjscie jest takie jak oczekujemy.
 ![obraz](https://hackmd.io/_uploads/SyOMLTFhke.png)
 
 Przykładowe wyniki na analizatorze stanu
 
 ![obraz](https://hackmd.io/_uploads/BJmkDpK3yg.png)
+## Zautomatyzowany układ sprawdzający na hali produkcyjnej
 ![image](https://hackmd.io/_uploads/HJrJ3n32yl.png)
+Generator słów wysyła odpowiedni sygnał wejściowy wraz z sygnałem wyjściowym, kolejno przechodząc przez wszystkie możliwe warianty.
 ![image](https://hackmd.io/_uploads/BkdZ3nn3Jg.png)
+Następnie wyniki są porównywane z wynikami układu testowanego za pomocą bramek XOR. Jeśli zostanie wykryty błąd, przerzutnik go zapisuje i wysyła sygnał do generatora słów, aby zatrzymać testowanie, jednocześnie zapalając na stałe czerwoną lampkę.
+![image](https://hackmd.io/_uploads/HyPxXclpJg.png)
 
 
 
