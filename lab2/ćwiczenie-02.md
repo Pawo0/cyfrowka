@@ -27,9 +27,9 @@ Aktualna wartość wskazywana przez licznik powinna być widoczna na wyświetlac
 Zaprojektowany przez nas licznik działa w pętli i wartość jest wyświetlana na wyświetlaczu siedmiosegmentowym. W projekcie wykorzystano **jeden typ przerzutnika** (T) oraz dowolne bramki logiczne. Rysunek poglądowy układu wygląda następująco:
 
 
- ![Zrzut ekranu 2025-03-22 192719](https://hackmd.io/_uploads/BkEQbK2hyg.png)
+ ![Zrzut ekranu 2025-03-22 192719](ukl.png)
  
------------------------------------- **Rysunek 1.1** Schemat licznika Fibonacciego ------------------------------------
+------------------------------------ **Rysunek 1.1** Schemat licznika Fibonacciego -----------------------------------
 
 Układ posiada 2 wejścia: zegarowe i reset oraz 4 wyjścia dla bitów, na których zapisana jest liczba należąca do ciągu
 
@@ -70,9 +70,10 @@ Liczby wyświetlane są wyświetlanie na ekranie cyfrowego licznika zgodnie z ko
 Dla każdego z 4 bitów można rozatrzyć przejścia T między każdymi dwoma liczbami w ciągu. Przejście jest rozumiane jako przełączenie przerzutnika
 
 ```
-Jakie T odpowiada za jaki bit:
 0 0 0 0  ➜  T3 T2 T1 T0
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### Przejście T0 (najmłodszy bit)
 
@@ -111,6 +112,8 @@ Jakie T odpowiada za jaki bit:
 |1**0**00|1**1**01|0 ➜ 1|1|
 |1**1**01|0**0**00|1 ➜ 0|1|
 
+
+<div style="page-break-after: always;"></div>
 
 ### Przejście T3 (najstarszy bit)
 
@@ -168,7 +171,8 @@ Jakie T odpowiada za jaki bit:
 </table>
 
 Z tabeli 4.1 wynika wzór na T<sub>3</sub> :
-$T_3 = \color{blue}{Q_2 \overline{Q_1}{Q_0}}$
+<span style="color:blue;"> T<sub>3</sub> =  Q<sub>2</sub>Q̅<sub>1</sub>Q<sub>0</sub></span>
+
 
 **Tabela 4.2** Tabela Karnaugh dla wejścia T<sub>2</sub> w czasie n
 
@@ -212,8 +216,10 @@ $T_3 = \color{blue}{Q_2 \overline{Q_1}{Q_0}}$
 
 Z tabeli 4.2 wynika wzór na T<sub>2</sub> :
 
-$T_2 = \color{blue}{Q_2 \overline{Q_1}{Q_0}} + \color{red}{\overline{Q_3}\overline{Q_2}Q_1Q_0} + \color{orange}{Q_3\overline{Q_2}\overline{Q_1}\overline{Q_0}}$
+T<sub>2</sub> = <span style="color:blue;">Q<sub>2</sub>Q̅<sub>1</sub>Q<sub>0</sub></span> + <span style="color:red;">Q̅<sub>3</sub>Q̅<sub>2</sub>Q<sub>1</sub>Q<sub>0</sub></span> + <span style="color:orange;">Q<sub>3</sub>Q̅<sub>2</sub>Q̅<sub>1</sub>Q̅<sub>0</sub></span>
 
+
+<div style="page-break-after: always;"></div>
 
 **Tabela 4.3** Tabela Karnaugh dla wejścia T<sub>1</sub> w czasie n
 
@@ -257,7 +263,7 @@ $T_2 = \color{blue}{Q_2 \overline{Q_1}{Q_0}} + \color{red}{\overline{Q_3}\overli
 
 Z tabeli 4.3 wynika wzór na T<sub>1</sub> :
 
-$T_1 = \color{blue}{\overline{Q_3} \overline{Q_2}{Q_0}}$
+T<sub>1</sub> = <span style="color:blue;">Q̅<sub>3</sub>Q̅<sub>2</sub>Q<sub>0</sub></span>
 
 **Tabela 4.4** Tabela Karnaugh dla wejścia T<sub>0</sub> w czasie n
 
@@ -302,22 +308,29 @@ $T_1 = \color{blue}{\overline{Q_3} \overline{Q_2}{Q_0}}$
 
 Z tabeli 4.4 wynika wzór na T<sub>0</sub> :
 
-$T_0 = \color{blue}{\overline{Q_3} \overline{Q_2}\overline{Q_1}} + \color{orange}{\overline{Q_3}\overline{Q_2}\overline{Q_0}} + \color{lightgreen}{Q_2\overline{Q_1}{Q_0}}+\color{red}{\overline{Q_2}\overline{Q_1}\overline{Q_0}}$
+T<sub>0</sub> = 
+<span style="color:blue;">Q̅<sub>3</sub>Q̅<sub>2</sub>Q̅<sub>1</sub></span> + 
+<span style="color:orange;">Q̅<sub>3</sub>Q̅<sub>2</sub>Q̅<sub>0</sub></span> + 
+<span style="color:lightgreen;">Q<sub>2</sub>Q̅<sub>1</sub>Q<sub>0</sub></span> + 
+<span style="color:red;">Q̅<sub>2</sub>Q̅<sub>1</sub>Q̅<sub>0</sub></span>
+
+<div style="page-break-after: always;"></div>
 
 Wykorzystując wyprowadzone wzory przygotowaliśmy implementację w multisimie:
 
 ||
 |:-------:|
-| ![logika](https://hackmd.io/_uploads/rJK2v5ZRJx.png)|
+| ![logika](logika.png)|
 | **Rysunek 4.1** Implementacja podukładu "Logika" |
 
-W implementacji uwzględniliśmy powtarzający się fragment wzorów ($\color{lightgreen}{Q_2\overline{Q_1}{Q_0}}$ w T3, T2 i T0), co pozwoliło na zmniejszenie liczby bramek z 11 na 9.
+W implementacji uwzględniliśmy powtarzający się fragment wzorów (<span style="color:lightgreen;">Q<sub>2</sub>Q̅<sub>1</sub>Q<sub>0</sub></span>
+ w T3, T2 i T0), co pozwoliło na zmniejszenie liczby bramek z 11 na 9.
 
 ## 5. Schemat układu
 Zaprojektowany licznik wygląda następująco:
 |                                            |
 |:-------:|
-| ![Zrzut ekranu 2025-03-22 180947](https://hackmd.io/_uploads/B1RJy_n2Jg.png) |
+| ![Zrzut ekranu 2025-03-22 180947](uk2.png) |
 | **Rysunek 5.1** Schemat licznika Fibonacciego w programie Multisim |
 
 <div style="page-break-after: always;"></div>
@@ -325,16 +338,12 @@ Zaprojektowany licznik wygląda następująco:
 Poniżej przedstawiona jest implementacja:
 |                                            |
 |:-------:|
-| ![Zrzut ekranu 2025-03-22 193345](https://hackmd.io/_uploads/SkWMmY3hyx.png)
- |
+| ![Zrzut ekranu 2025-03-22 193345](licznik.png)|
 | **Rysunek 5.2** Implementacja licznika |
-
-<div style="page-break-after: always;"></div>
 
 |                                            |
 |:-------:|
-|![Zrzut ekranu 2025-03-22 194132](https://hackmd.io/_uploads/HJdJXcn3Jg.png)
-|
+|<img src="przerzutniki.png" width="75%" />|
 | **Rysunek 5.3** Implementacja podukładu "Przerzutniki" |
 
 
@@ -345,7 +354,7 @@ Aby wyświetlić liczby na 2 wyświetlaczach siedmiosegmentowych zaprojektowali�
 
 |                                            |
 |:-------:|
-| ![dekoder](https://hackmd.io/_uploads/BkTN3t3nJl.png)|
+| ![dekoder](dekoder.png)|
 | **Rysunek 4.9** Implementacja podukładu "Decoder" |
 
 Gotowy układ wraz z wyświetlaczami siedmiosegmentowymi wygląda następująco:
@@ -353,8 +362,10 @@ Gotowy układ wraz z wyświetlaczami siedmiosegmentowymi wygląda następująco:
 
 |                                            |
 |:-------:|
-| ![uklad](https://hackmd.io/_uploads/HJwniY32Jg.png)|
+| ![uklad](uklad.png)|
 | **Rysunek 4.10** Implementacja gotowego układu |
+
+<div style="page-break-after: always;"></div>
 
 ## 5. Układ testowy
 Korzystając z wcześniejszych podukładów zrobiliśmy układ testowy w celu sprawdzenia poprawności naszego licznika, korzystając z generatora słów oraz analizatora stanów logicznych. Gdy układ jest wadliwy dioda zapala się na czerwono
@@ -362,19 +373,17 @@ Korzystając z wcześniejszych podukładów zrobiliśmy układ testowy w celu sp
 
 |                                            |
 |:-------:|
-| ![uklad testujacy](https://hackmd.io/_uploads/SyEe6K32yg.png)|
+| ![uklad testujacy](uklad-testujacy.png)|
 | **Rysunek 5.1** Układ testowy |
 
 Poniżej znajdują się wyniki analizatora logicznego wraz z ustawieniem generatora słów:
 
 |                                            |
 |:-------:|
-| ![przykladowe wyniki](https://hackmd.io/_uploads/SkQlkjn2kl.png)|
+| ![przykladowe wyniki](przykladowe-wyniki.png)|
 | **Rysunek 5.2** Wyniki testów |
 
 Na podstawie analizowanych testów widać, że sekwencja czterech bitów zmienia się zgodnie z oczekiwaniami, bit piąty spełnia funkcję resetowania, a szósty bit pozostaje w stanie niskim, co potwierdza poprawne działanie układu. Generator słów wprowadza kolejne sekwencje testowe, a układ reaguje prawidłowo na wszystkie badane kombinacje wejściowe.
-
-<div style="page-break-after: always;"></div>
 
 ## Wnioski
 
@@ -395,4 +404,4 @@ Na podstawie analizowanych testów widać, że sekwencja czterech bitów zmienia
 
 - Przedstawiony poniżej system wykorzystuje licznik do kontrolowania dostępu do lodówki. Lodówka automatycznie blokuje się po każdym otwarciu na czas zgodny z sekwencją licznika. Na wyświetlaczu widoczny jest aktualny czas blokady, a diody pokazują liczbę poprzednich otwarć. System można zresetować wrzucając monetę do skarbonki.
 
-![Zrzut ekranu 2025-03-22 221251](https://hackmd.io/_uploads/rJlTHFjh3yg.png)
+![Zrzut ekranu 2025-03-22 221251](zastosowanie.png)
