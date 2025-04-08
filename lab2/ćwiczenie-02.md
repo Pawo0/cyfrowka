@@ -27,7 +27,7 @@ Aktualna wartość wskazywana przez licznik powinna być widoczna na wyświetlac
 Zaprojektowany przez nas licznik działa w pętli i wartość jest wyświetlana na wyświetlaczu siedmiosegmentowym. W projekcie wykorzystano **jeden typ przerzutnika** (T) oraz dowolne bramki logiczne. Rysunek poglądowy układu wygląda następująco:
 
 
- ![Zrzut ekranu 2025-03-22 192719](ukl.png)
+ ![Zrzut ekranu 2025-03-22 192719]("assets\ukl.png")
  
 ------------------------------------ **Rysunek 1.1** Schemat licznika Fibonacciego -----------------------------------
 
@@ -320,7 +320,7 @@ Wykorzystując wyprowadzone wzory przygotowaliśmy implementację w multisimie:
 
 ||
 |:-------:|
-| ![logika](logika.png)|
+| ![logika]("assets\logika.png")|
 | **Rysunek 4.1** Implementacja podukładu "Logika" |
 
 W implementacji uwzględniliśmy powtarzający się fragment wzorów (<span style="color:lightgreen;">Q<sub>2</sub>Q̅<sub>1</sub>Q<sub>0</sub></span>
@@ -330,7 +330,7 @@ W implementacji uwzględniliśmy powtarzający się fragment wzorów (<span styl
 Zaprojektowany licznik wygląda następująco:
 |                                            |
 |:-------:|
-| ![Zrzut ekranu 2025-03-22 180947](uk2.png) |
+| ![Zrzut ekranu 2025-03-22 180947]("assets\uk2.png") |
 | **Rysunek 5.1** Schemat licznika Fibonacciego w programie Multisim |
 
 <div style="page-break-after: always;"></div>
@@ -338,12 +338,12 @@ Zaprojektowany licznik wygląda następująco:
 Poniżej przedstawiona jest implementacja:
 |                                            |
 |:-------:|
-| ![Zrzut ekranu 2025-03-22 193345](licznik.png)|
+| ![Zrzut ekranu 2025-03-22 193345]("assets\licznik.png")|
 | **Rysunek 5.2** Implementacja licznika |
 
 |                                            |
 |:-------:|
-|<img src="przerzutniki.png" width="75%" />|
+|<img src="assets\przerzutniki.png" width="75%" />|
 | **Rysunek 5.3** Implementacja podukładu "Przerzutniki" |
 
 
@@ -354,7 +354,7 @@ Aby wyświetlić liczby na 2 wyświetlaczach siedmiosegmentowych zaprojektowali�
 
 |                                            |
 |:-------:|
-| ![dekoder](dekoder.png)|
+| ![dekoder]("assets\dekoder.png")|
 | **Rysunek 4.9** Implementacja podukładu "Decoder" |
 
 Gotowy układ wraz z wyświetlaczami siedmiosegmentowymi wygląda następująco:
@@ -362,7 +362,7 @@ Gotowy układ wraz z wyświetlaczami siedmiosegmentowymi wygląda następująco:
 
 |                                            |
 |:-------:|
-| ![uklad](uklad.png)|
+| ![uklad]("assets\uklad.png")|
 | **Rysunek 4.10** Implementacja gotowego układu |
 
 <div style="page-break-after: always;"></div>
@@ -373,14 +373,14 @@ Korzystając z wcześniejszych podukładów zrobiliśmy układ testowy w celu sp
 
 |                                            |
 |:-------:|
-| ![uklad testujacy](uklad-testujacy.png)|
+| ![uklad testujacy]("assets\uklad-testujacy.png")|
 | **Rysunek 5.1** Układ testowy |
 
 Poniżej znajdują się wyniki analizatora logicznego wraz z ustawieniem generatora słów:
 
 |                                            |
 |:-------:|
-| ![przykladowe wyniki](przykladowe-wyniki.png)|
+| ![przykladowe wyniki]("assets\przykladowe-wyniki.png")|
 | **Rysunek 5.2** Wyniki testów |
 
 Na podstawie analizowanych testów widać, że sekwencja czterech bitów zmienia się zgodnie z oczekiwaniami, bit piąty spełnia funkcję resetowania, a szósty bit pozostaje w stanie niskim, co potwierdza poprawne działanie układu. Generator słów wprowadza kolejne sekwencje testowe, a układ reaguje prawidłowo na wszystkie badane kombinacje wejściowe.
@@ -404,4 +404,4 @@ Na podstawie analizowanych testów widać, że sekwencja czterech bitów zmienia
 
 - Przedstawiony poniżej system wykorzystuje licznik do kontrolowania dostępu do lodówki. Lodówka automatycznie blokuje się po każdym otwarciu na czas zgodny z sekwencją licznika. Na wyświetlaczu widoczny jest aktualny czas blokady, a diody pokazują liczbę poprzednich otwarć. System można zresetować wrzucając monetę do skarbonki.
 
-![Zrzut ekranu 2025-03-22 221251](zastosowanie.png)
+![Zrzut ekranu 2025-03-22 221251]("assets\zastosowanie.png")
