@@ -59,7 +59,7 @@ W celu wyświetlenia ciągu binarnego na liczniku cyfrowym potrzebna jest jego b
 
 ### Przejścia liczb w ciągu
 
-Liczby wyświetlane są wyświetlanie na ekranie cyfrowego licznika zgodnie z kolejnością ciągu fibbonaciego.
+Liczby wyświetlane są na ekranie cyfrowego licznika zgodnie z kolejnością ciągu fibbonaciego.
 
 ```
 0 (0000) ➜ 1 (0001) ➜ 2 (0010) ➜ 3 (0011) ➜
