@@ -91,21 +91,9 @@ Pozwala to nam na synchronizacje z licznikiem i umożliwienie przeskoku o dokła
 
 ![image](./assets/parser.png)
 
-Kluczowymi elementami układu są **dwa przerzutniki typu D (U25, U27)**, taktowane wspólnym sygnałem zegarowym CLK. Przerzutniki D działają na zbocze narastające sygnału zegarowego. W momencie pojawienia się tego zbocza, przerzutnik "przechwytuje" wartość logiczną obecną na swoim wejściu D i przepisuje ją na swoje wyjście Q. Wyjście Q utrzymuje ten stan do nadejścia kolejnego zbocza zegara.
+W układzie wykorzystano dwa przerzutniki D (U25 i U27), które zapamiętują sygnały STOP i PLAY na narastającym zboczu zegara CLK. Dzięki temu nawet krótki impuls zostaje "złapany" i utrzymany przez jeden cykl zegara.
 
-**Przetwarzanie sygnału STOP** 
-Sygnał `STOP` jest podawany na wejście `D` przerzutnika U25. W momencie narastającego zbocza `CLK`, stan sygnału `STOP` jest zapisywany na wyjściu `Q` przerzutnika U25. Dzięki temu, nawet krótki impuls lub ustabilizowany stan wysoki na wejściu `STOP` spowoduje pojawienie się impulsu o długości jednego taktu zegara na wyjściu `Q` przerzutnika U25.
-
-**Przetwarzanie sygnału PLAY** 
-Analogicznie, sygnał `PLAY` jest podawany na wejście `D` przerzutnika U27. W momencie narastającego zbocza `CLK`, stan sygnału `PLAY` jest zapisywany na wyjściu `Q` przerzutnika U27, generując jednoczesny impuls na jego wyjściu `Q`.
-
-Wyjścia `Q` przerzutników są następnie wykorzystywane przez bramki logiczne AND (U29 i U31) oraz NOT (U30 i U32) do generowania sygnałów wyjściowych `STOP_O` i `PLAY_O` oraz do implementacji mechanizmu blokującego.
-
-Sygnał `STOP_O` jest generowany przez bramkę AND U29, której wejściami są wyjście `Q` przerzutnika U25 oraz zanegowane wyjście `Q` przerzutnika U27. Oznacza to, że impuls na `STOP_O` pojawi się tylko wtedy, gdy wykryty zostanie sygnał `STOP` (Q przerzutnika U25 jest wysokie) i jednocześnie nie zostanie wykryty sygnał `PLAY` (`Q` przerzutnika U27 jest niskie).
-
-Sygnał `PLAY_O` jest generowany przez bramkę AND U31, której wejściami są wyjście `Q` przerzutnika U27 oraz zanegowane wyjście `Q` przerzutnika U25. Impuls na `PLAY_O` pojawi się tylko wtedy, gdy wykryty zostanie sygnał `PLAY` (`Q` przerzutnika U27 jest wysokie) i jednocześnie nie zostanie wykryty sygnał `STOP` (`Q` przerzutnika U25 jest niskie).
-
-Dzięki takiemu połączeniu, układ zapewnia, że na wyjściach `STOP_O` i `PLAY_O` pojawiają się krótkie, jednoczesne impulsy odpowiadające wykryciu sygnałów `STOP` i `PLAY` w takt zegara, a jednoczesne wystąpienie aktywnych sygnałów wejściowych jest blokowane, uniemożliwiając pojawienie się impulsów na obu wyjściach w tym samym czasie.
+Wyjścia przerzutników trafiają do bramek logicznych, które tworzą impulsy `STOP_O` i `PLAY_O` – ale tylko wtedy, gdy sygnał `STOP` lub `PLAY` został wykryty samodzielnie (bez drugiego sygnału aktywnego w tym samym czasie). Dzięki temu układ blokuje jednoczesne uruchomienie obu funkcji.
 
 #### Komponent Logiki Zmian
 
