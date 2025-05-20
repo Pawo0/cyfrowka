@@ -282,6 +282,35 @@ Układ ten:
 - Umożliwia zatrzymać lub wznowić słuchanie utworu.
 - Posiada diody informujące o stanie muzyki, czy jest ona obecnie odtwarzana czy też nie.
 
+## Układ testujący
+
+Aby umożliwić sprawdzenie działalności ukłądu dodano urządzenia do analizy wartości logicznych (logic analyzer). Pozwala on sprawdzić stan logiczny zmiennej w określonym miejscu. 
+
+W układzie wstawione zostały dwa takie analizatory.
+
+![image](./assets/TestCircuit.png)
+
+#### Parser Input Analyzer
+
+Umożliwia sprawdzenie stanu zmiennych `STOP`, `PLAY`, `NEXT`, `PREV` przed wejściem do `Input Parsera` oraz na jego wyjściu. 
+
+Przykładowe odczyty z analizatora:
+![image](./assets/InputParserTests.png)
+
+#### Counter Value and Change Logic Analyzer
+
+Umożliwia sprawdzenie stanu zmiennych `Q0` i `Q1` przekazywanych do wyświetlacza dwubitowego, zmiennych `NEXT_O` i `PREV_O` w celu pokazania kiedy użytkownik wcisnął przycisk oraz `T0` i `T1` w celu sprawdzenia czy komponent `Change Logic` poprawnie przekazuje wartości określające zmiany bitowe w `Counter`.
+
+Przykładowe odczyty z analizatora:
+![image](./assets/LogicCounterTests.png)
+
+#### Music Status Analyzer
+
+Umożliwia sprawdzenie zachowania przycisków `STOP_O` oraz `PLAY_O` i ich wpływu na wartość `PLAYING`. Wartość `STOPPED` nie została podpięta do ukłądu gdyż jest ona równa `~PLAYING`
+
+Przykładowe odczyty z analizatora:
+![image](./assets/MusicAnalyzer.png)
+
 ## Inne zastosowania
 
 Układ sprawdziłby się także w roli kontrolera treści reklamowych wyświetlanych na ekranie telewizora / monitora. Z dostępnych 4 reklam odtwarzałby jedną wybraną.
