@@ -284,9 +284,7 @@ Układ ten:
 
 ## Układ testujący
 
-Aby umożliwić sprawdzenie działalności ukłądu dodano urządzenia do analizy wartości logicznych (logic analyzer). Pozwala on sprawdzić stan logiczny zmiennej w określonym miejscu. 
-
-W układzie wstawione zostały dwa takie analizatory.
+Aby umożliwić sprawdzenie działalności ukłądu dodano urządzenia do analizy wartości logicznych (logic analyzer) oraz generator słów który razem z komponentem `tester` pozwala na sprawdzanie poprawności działania.
 
 ![image](./assets/TestCircuit.png)
 
@@ -310,6 +308,23 @@ Umożliwia sprawdzenie zachowania przycisków `STOP_O` oraz `PLAY_O` i ich wpły
 
 Przykładowe odczyty z analizatora:
 ![image](./assets/MusicAnalyzer.png)
+
+#### Tester i Generator Słów
+
+Ten podukład pozwala sprawdzić poprawność działania automatu. `Tester` porównuje otrzymywane na wyjściu wyniki z oczekiwanymi, które są podane wewnątrz generatora słów.
+
+Generator słów został wypełniony następującymi wartościami:
+![image](./assets/WordGenerator.png)
+
+Pierwsze 4 bity odpowiadają wartościom `PLAY, STOP, PREV, NEXT`. 9, 10 oraz 11 bit opisują kolejno oczekiwane wartości `Q0, Q1, PLAYING`.
+
+Wartości są porównywane w testerze.
+![image](./assets/tester_ex.png)
+![image](./assets/tester.png)
+
+Dioda testera zapala się cyklicznie. Cykliczne zapalanie diody nie oznacza błędu. Dopiero jej stałe zapalenie świadczy o błędzie w układzie.
+
+> Układ nie resetuje automatycznie generatora słów. Zatem by testy działały poprawnie ważne jest jego zresetowanie przed uruchomieniem symulacji.
 
 ## Inne zastosowania
 
