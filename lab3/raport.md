@@ -52,6 +52,8 @@ Odtwarzacz umożliwia również możliwość zatrzymania utworu przyciskiem **ST
 
 **Komponent statusu granej muzyki** obsługuje logikę zatrzymania i wznowienia słuchania oraz informacje o stanie granego utworu.
 
+Dodatkowo jeżeli muzyka jest zatrzymana, a zajdzie zmiana stanu licznika (wciśnięcie `NEXT` lub `PREVIOUS`) stan odtwarzacza muzyki ustawi się na odtwarzanie `( PLAYING )`. 
+
 - #### Parsery wejść
 
 Parser umożliwia nam kontrolowanie wejść przycisków **NEXT, PREVIOUS, PLAY, STOP**. Pełni on dwie funkcje:
@@ -66,59 +68,55 @@ Parser umożliwia nam kontrolowanie wejść przycisków **NEXT, PREVIOUS, PLAY, 
 
 Wszystkie przedstawione komponenty razem pozwalają nam na wybranie numeru utworu oraz jego odtworzenie lub zatrzymanie.
 
+Pewnie, oto poprawiona wersja Twojego opisu — z ładniejszym brzmieniem, poprawionym językiem oraz dopisanym wyjaśnieniem o alternatywnym podejściu:
+
+---
+
 ## Schemat działania automatu
 
-W związku z tym, ze system logiki zatrzymywania i wznawiania muzyki nie jest powiązany w żaden sposób z systemem zmiany obecneego utworu, układ podzielony jest na dwa osobne automaty.
-
-#### Automat zmiany utworu (licznik)
 **Typ automatu: Mealy**
 
-Ten automat pełni funkcję licznika i odpowiada za wybór aktualnie odtwarzanego utworu. Posiada cztery możliwe stany odpowiadające kolejnym utworom:
+Automat realizuje dwie funkcje:
+
+* wybór (aktualizację) numeru odtwarzanego utworu,
+* kontrolę stanu odtwarzania (muzyka gra lub jest zatrzymana).
+
+Zarówno stan wewnętrzny automatu, jak i sygnały pochodzące od użytkownika (naciśnięcia przycisków), wpływają na jego działanie. Ponieważ wyjścia zależą jednocześnie od aktualnego stanu oraz sygnału wejściowego, mamy do czynienia z automatem typu **Mealy**.
+
+Automat umożliwia również rozpoczęcie odtwarzania muzyki przy pomocy przycisków zmiany utworu, co dodatkowo zwiększa jego funkcjonalność.
+
+W rezultacie wyróżniamy 8 możliwych stanów automatu:
 
 ```
-00 – utwór 0
+000 – utwór 0, zatrzymany
+100 – utwór 0, odtwarzany
 
-01 – utwór 1
+001 – utwór 1, zatrzymany
+101 – utwór 1, odtwarzany
 
-10 – utwór 2
+010 – utwór 2, zatrzymany
+110 – utwór 2, odtwarzany
 
-11 – utwór 3
+011 – utwór 3, zatrzymany
+111 – utwór 3, odtwarzany
 ```
 
-Wejścia sterujące:
+Do zmiany stanów służą cztery przyciski sterujące:
 
-`N (NEXT)` – przejście do następnego utworu,
+```
+STOP  – zatrzymuje muzykę  
+PLAY  – wznawia odtwarzanie  
+NEXT  – przechodzi do następnego utworu i wznawia odtwarzanie, jeśli było zatrzymane  
+PREV  – przechodzi do poprzedniego utworu i wznawia odtwarzanie, jeśli było zatrzymane  
+```
 
-`P (PREVIOUS)` – powrót do poprzedniego utworu.
+Schemat działania automatu przedstawiony jest poniżej:
 
-Automat działa cyklicznie – po utworze 11 wraca do 00, a przed 00 przechodzi do 11.
+![image](./assets/automat.jpg)
 
-> Jest to automat typu Mealy, ponieważ przejścia między stanami (i zmiana utworu) zależą jednocześnie od aktualnego stanu i sygnału wejściowego (N lub P).
+> **Uwaga:**
+Na etapie projektowania rozważano również alternatywne podejście polegające na rozdzieleniu funkcji wyboru utworu i kontroli odtwarzania na dwa oddzielne automaty. Takie rozwiązanie mogłoby uprościć zarówno logikę przejść, jak i sam schemat, dzięki rozdzieleniu odpowiedzialności na dwa mniejsze, bardziej przejrzyste bloki funkcjonalne.
 
-**Schemat:**
-
-![image](./assets/counter_automat.jpg)
-
-#### Automat sterujący odtwarzaniem muzyki
-**Typ automatu: Mealy**
-
-Automat ten odpowiada za kontrolę stanu odtwarzacza muzycznego. Może znajdować się w jednym z dwóch stanów:
-
-`STOPPED` – muzyka jest zatrzymana,
-
-`PLAYING` – muzyka jest odtwarzana.
-
-Przyciski sterujące:
-
-`PLAY` – zmienia stan z „STOPPED” na „PLAYING”,
-
-`STOP` – zmienia stan z „PLAYING” na „STOPPED”.
-
-> Jest to automat typu Mealy, ponieważ jego wyjście (czy muzyka gra, czy nie) zależy od aktualnego stanu oraz sygnału wejściowego (np. naciśnięcia przycisku PLAY lub STOP)
-
-**Schemat:**
-
-![image](./assets/music_automat.jpg)
 
 ## Implementacja Rozwiązania
 
@@ -309,6 +307,12 @@ T = ~PLAYING * PLAY + PLAYING * STOP
 ```
 
 Parametr `T` został podpięty do przerzutnika, który przekazuje wartości `Q` i `~Q` na wyjścia `PLAYING_O` oraz `STOPPED_O`.
+
+**Zmiana stanu przy NEXT i PREVIOUS**
+
+Mechanizm zmiany stanu odtwarzania muzyki podczas przełączania utworów został zrealizowany przy użyciu przerzutnika typu T. Przerzutnik ten umożliwia ustawienie wyjścia w stan niski (0) poprzez sygnał `RESET`.
+
+Wyjścia sygnałów `NEXT_O` oraz `PREV_O` zostały podłączone do wejścia RESET przerzutnika, co pozwala na automatyczne wznawianie odtwarzania muzyki po zmianie utworu. Dzięki temu każda zmiana utworu (na poprzedni lub następny) powoduje wyzerowanie stanu „zatrzymania”, a muzyka zaczyna grać od razu po przełączeniu.
 
 Finalnie układ wygląda następująco:
 
