@@ -140,11 +140,9 @@ Z tej tabeli możemy zauważyć ważną cechę!
 
 Wartość bitu starszego `Q0` nie wpływa na logikę zmiany bitu `T0` niezależnie czy chcemy utwór następny czy poprzedni. Zatem jego wartość będzie zależna tylko i wyłącznie od wejścia `PREVIOUS` oraz `NEXT`.
 
-Wartość `PREVIOUS` nie wpływa na wartość logiczną `NEXT` ani na odwrót. Obie te operacje są od siebie niezależne. Dodatkowo zmiana zachodzi tylko i wyłącznie wtedy gdy jedna z tych zmiennych przyjmuje wartość logiczną równą 1.
+Wartość T0 oraz T1 chcemy przekazać do `Countera` tylko wtedy gdy użytkownik wciśnie przycisk. Zatem T1 oraz T0 wymaga wysokiej wartości `PREVIOUS` lub `NEXT`.
 
-Zatem zmiana `T1` oraz `T0` zachodzi tylko wtedy gdy `NEXT = 1` lub `PREVIOUS = 1`
-
-Dlatego dzielimy logikę zmiany `T1` oraz `T0` na dwa osobne podzespoły `T1_NEXT` i `T0_PREV`.
+Dlatego logikę zmian możemy przedstawić w formie dwóch tabel Karnaugh `T1_NEXT` zależnego od `NEXT` i `T0_PREV` zależnego od `PREV`.
 
 - **T1_NEXT**
 
@@ -312,7 +310,7 @@ Wartości są porównywane w testerze.
 
 Dioda testera zapala się cyklicznie. Cykliczne zapalanie diody nie oznacza błędu. Dopiero jej stałe zapalenie świadczy o błędzie w układzie.
 
-> Układ nie resetuje automatycznie generatora słów. Zatem by testy działały poprawnie ważne jest jego zresetowanie przed uruchomieniem symulacji.
+> Sprawdzenie poprawności programu powinno nastąpić po błyśnięciu diody `Cycle Start`. Wtedy licznik jest zresetowany a kursor generatora słów jest ustawiony na początek.
 
 ## Inne zastosowania
 
