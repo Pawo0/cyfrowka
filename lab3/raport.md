@@ -66,6 +66,60 @@ Parser umożliwia nam kontrolowanie wejść przycisków **NEXT, PREVIOUS, PLAY, 
 
 Wszystkie przedstawione komponenty razem pozwalają nam na wybranie numeru utworu oraz jego odtworzenie lub zatrzymanie.
 
+## Schemat działania automatu
+
+W związku z tym, ze system logiki zatrzymywania i wznawiania muzyki nie jest powiązany w żaden sposób z systemem zmiany obecneego utworu, układ podzielony jest na dwa osobne automaty.
+
+#### Automat zmiany utworu (licznik)
+**Typ automatu: Mealy**
+
+Ten automat pełni funkcję licznika i odpowiada za wybór aktualnie odtwarzanego utworu. Posiada cztery możliwe stany odpowiadające kolejnym utworom:
+
+```
+00 – utwór 0
+
+01 – utwór 1
+
+10 – utwór 2
+
+11 – utwór 3
+```
+
+Wejścia sterujące:
+
+`N (NEXT)` – przejście do następnego utworu,
+
+`P (PREVIOUS)` – powrót do poprzedniego utworu.
+
+Automat działa cyklicznie – po utworze 11 wraca do 00, a przed 00 przechodzi do 11.
+
+> Jest to automat typu Mealy, ponieważ przejścia między stanami (i zmiana utworu) zależą jednocześnie od aktualnego stanu i sygnału wejściowego (N lub P).
+
+**Schemat:**
+
+![image](./assets/counter_automat.jpg)
+
+#### Automat sterujący odtwarzaniem muzyki
+**Typ automatu: Moore**
+
+Automat ten odpowiada za kontrolę stanu odtwarzacza muzycznego. Może znajdować się w jednym z dwóch stanów:
+
+`STOPPED` – muzyka jest zatrzymana,
+
+`PLAYING` – muzyka jest odtwarzana.
+
+Przyciski sterujące:
+
+`PLAY` – zmienia stan z „STOPPED” na „PLAYING”,
+
+`STOP` – zmienia stan z „PLAYING” na „STOPPED”.
+
+> Jest to automat typu Moore, ponieważ jego wyjście (czy muzyka gra, czy nie) zależy wyłącznie od aktualnego stanu, a nie od wejścia w danej chwili. Zmiana stanu następuje po podaniu sygnału wejściowego, ale sam stan decyduje o działaniu wyjścia.
+
+**Schemat:**
+
+![image](./assets/music_automat.jpg)
+
 ## Implementacja Rozwiązania
 
 #### Licznik
@@ -280,7 +334,7 @@ Układ ten:
 
 ## Układ testujący
 
-Aby umożliwić sprawdzenie działalności ukłądu dodano urządzenia do analizy wartości logicznych (logic analyzer) oraz generator słów który razem z komponentem `tester` pozwala na sprawdzanie poprawności działania.
+Aby umożliwić sprawdzenie działalności układu dodano urządzenia do analizy wartości logicznych (logic analyzer) oraz generator słów który razem z komponentem `tester` pozwala na sprawdzanie poprawności działania.
 
 ![image](./assets/TestCircuit.png)
 
