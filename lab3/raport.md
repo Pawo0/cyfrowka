@@ -100,7 +100,7 @@ Automat działa cyklicznie – po utworze 11 wraca do 00, a przed 00 przechodzi 
 ![image](./assets/counter_automat.jpg)
 
 #### Automat sterujący odtwarzaniem muzyki
-**Typ automatu: Moore**
+**Typ automatu: Mealy**
 
 Automat ten odpowiada za kontrolę stanu odtwarzacza muzycznego. Może znajdować się w jednym z dwóch stanów:
 
@@ -114,7 +114,7 @@ Przyciski sterujące:
 
 `STOP` – zmienia stan z „PLAYING” na „STOPPED”.
 
-> Jest to automat typu Moore, ponieważ jego wyjście (czy muzyka gra, czy nie) zależy wyłącznie od aktualnego stanu, a nie od wejścia w danej chwili. Zmiana stanu następuje po podaniu sygnału wejściowego, ale sam stan decyduje o działaniu wyjścia.
+> Jest to automat typu Mealy, ponieważ jego wyjście (czy muzyka gra, czy nie) zależy od aktualnego stanu oraz sygnału wejściowego (np. naciśnięcia przycisku PLAY lub STOP)
 
 **Schemat:**
 
