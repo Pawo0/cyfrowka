@@ -22,7 +22,7 @@ oraz powinien posiadać **dwubitowe wyjście binarne** określające numer utwor
 
 ## Pomysł na rozwiązanie
 
-Ta część poświęcona jest krótkiemu przedstawieniu naszej ideei rowiązania tego zadania oraz przedstawienia komponentów które potrzebowaliśmy stworzyć lub zaimplementować w celu jego realizacji. Dokłądny opis każdego z komponentów oraz wizualizacji ukłądów znajduje się w sekcji **Implementacja Rozwiązania**
+Ta część poświęcona jest krótkiemu przedstawieniu naszej idei rowiązania tego zadania oraz przedstawienia komponentów które potrzebowaliśmy stworzyć lub zaimplementować w celu jego realizacji. Dokłądny opis każdego z komponentów oraz wizualizacji ukłądów znajduje się w sekcji **Implementacja Rozwiązania**
 
 Do stworzenia ukłądu któy posłużyłby jako odtwarzacz plików muzycznych MP3 wykorzystaliśmy:
 
@@ -48,19 +48,19 @@ Komponent pobiera wartość z licznika i aktualizuje ją na poprzednią w kolejn
 
 - #### Komponent statusu granej muzyki
 
-Odtwarzacz umożliwia również możliwość zapauzowania utwory przyciskiem **STOP** oraz wznowienia słuchania przyciskiem **PLAY**. 
+Odtwarzacz umożliwia również możliwość zatrzymania utworu przyciskiem **STOP** oraz wznowienia słuchania przyciskiem **PLAY**. 
 
-**Komponent statusu granej muzyki** obsługuje zmianę stanu muzyki i za pomocą diod informuje czy muzyka w danym momencie jest odgrywana czy zatrzymana.
+**Komponent statusu granej muzyki** obsługuje logikę zatrzymania i wznowienia słuchania oraz informacje o stanie granego utworu.
 
 - #### Parsery wejść
 
 Parser umożliwia nam kontrolowanie wejść przycisków **NEXT, PREVIOUS, PLAY, STOP**. Pełni on dwie funkcje:
 
-1. Parser upewnia się, że wyjście z każdego przycisku trwa dokłądnie jeden takt zegara (zachowanie przypominające naciśnięcie i odpuszczenie przycisku)
+1. Parser upewnia się, że wyjście z każdego przycisku trwa nie dłużej niż jeden takt zegara (zachowanie przypominające naciśnięcie i odpuszczenie przycisku)
 
 2. Parser blokuje możliwość wciśnięcia dwóch przycisków na raz (PLAY I PAUSE lub NEXT I PREVIOUS). 
 
-Warto dodać, że kliknięcie jednego z przycisków do wyboru muzyki oraz jednego z przycisków do odtwarzania lub zatrzymania muzki na raz jest możliwe, ponieważ ta akcja nie konfilktuje ze sobą logiki komponentów.
+> Warto dodać, że kliknięcie jednego z przycisków do wyboru muzyki oraz jednego z przycisków do odtwarzania lub zatrzymania muzki na raz jest możliwe, ponieważ ta akcja nie konfilktuje ze sobą logiki komponentów.
 
 #### Podsumowanie pomysłu na rozwiązanie
 
@@ -79,8 +79,6 @@ liczb (0, 1, 2, 3).
 
 Wyjścia Q opisują obecny stan licznika, a wejścia T umożliwiają jego zmianę.
 
-Dodatkowo licznik wymaga wejść CLK, któy pozwala na synchonizację działania przerzutników oraz RESET, który pozwala na przywrócenie domyślnej wartości przerzutnika, czyli 0. W przypadku odtwarzacza MP3 wejście RESET nie zostało wykorzystane więc jest ono podpięte do uziemienia. (Będzie później widoczne na obrazku)
-
 Na obrazku widać również brakujące wyjście `~Q1`, jest to zabieg celowy, ponieważ negatywna wartość logiczna zmiennej `Q1` nie znalazła zastosowania w układzie zatem została pominięta.
 
 #### Parsery Wejść
@@ -91,7 +89,7 @@ Pozwala to nam na synchronizacje z licznikiem i umożliwienie przeskoku o dokła
 
 ![image](./assets/parser.png)
 
-W układzie wykorzystano dwa przerzutniki D (U25 i U27), które zapamiętują sygnały STOP i PLAY na narastającym zboczu zegara CLK. Dzięki temu nawet krótki impuls zostaje "złapany" i utrzymany przez jeden cykl zegara.
+W układzie wykorzystano dwa przerzutniki D (U25 i U27), które zapamiętują sygnały `STOP` i `PLAY` na narastającym zboczu zegara CLK. Dzięki temu nawet krótki impuls zostaje "złapany" i utrzymany przez jeden cykl zegara.
 
 Wyjścia przerzutników trafiają do bramek logicznych, które tworzą impulsy `STOP_O` i `PLAY_O` – ale tylko wtedy, gdy sygnał `STOP` lub `PLAY` został wykryty samodzielnie (bez drugiego sygnału aktywnego w tym samym czasie). Dzięki temu układ blokuje jednoczesne uruchomienie obu funkcji.
 
@@ -109,7 +107,7 @@ NEXT - czy zmienić na następny utwór
 PREVIOUS - czy zmienić na poprzedni utwór
 ```
 
-> Brakujące wartości wejścia dla `Q1` oraz `~Q1` nie są błędem. W etapie dotyczącym wyznaczenia wartości T1 oraz T0 w zależności od wartości NEXT i PREVIOUS zostanie wytłumaczona ta decyzja!
+> Brakujące wartości wejścia dla `Q1` oraz `~Q1` nie są błędem. W etapie dotyczącym wyznaczenia wartości T1 oraz T0 w zależności od wartości NEXT i PREVIOUS zostanie wyjaśniona ta decyzja!
 
 Na końcu komponent zwraca nam na wyjściach `T1 oraz T0` czy dany bit ma być zmieniony czy nie.
 
@@ -136,10 +134,6 @@ Tabela predstawiająca wszystkie wartości logiczne oraz zmiany bitów (Negacje 
 
 Przypadki gdy PREVIOUS oraz NEXT są równe nie zostały rozpatrzone, ponieważ nie chcemy wtedy podejmować żadnych akcji. Warto dodać, że taka sytuacja nigdy nie będzie miałą miejsca ze względu na **Parsery**, które blokują taką możliwość.
 
-Z tej tabeli możemy zauważyć ważną cechę!
-
-Wartość bitu starszego `Q0` nie wpływa na logikę zmiany bitu `T0` niezależnie czy chcemy utwór następny czy poprzedni. Zatem jego wartość będzie zależna tylko i wyłącznie od wejścia `PREVIOUS` oraz `NEXT`.
-
 Wartość T0 oraz T1 chcemy przekazać do `Countera` tylko wtedy gdy użytkownik wciśnie przycisk. Zatem T1 oraz T0 wymaga wysokiej wartości `PREVIOUS` lub `NEXT`.
 
 Dlatego logikę zmian możemy przedstawić w formie dwóch tabel Karnaugh `T1_NEXT` zależnego od `NEXT` i `T0_PREV` zależnego od `PREV`.
@@ -161,7 +155,15 @@ T1 = Q0 * NEXT
 
 `Wartość T0`
 
+|Q0\Q1|0|1|
+|-----|--|--|
+|0|1|1|
+|1|1|1|
+
+Q0 oraz Q1 nie wpływa na zmianę T0 więc:
+
 ```
+T0 = 1 * NEXT
 T0 = NEXT
 ```
 
@@ -182,11 +184,19 @@ T1 = ~Q0 * PREVIOUS
 
 `Wartość T0`
 
+|Q0\Q1|0|1|
+|-----|--|--|
+|0|1|1|
+|1|1|1|
+
+Q0 oraz Q1 nie wpływa na zmianę T0 więc:
+
 ```
+T0 = 1 * PREVIOUS
 T0 = PREVIOUS
 ```
 
-Po analizie otrzymanych przez nas wartości T1 oraz T0 dla NEXT i PREVIOUS zdecydowaliśmy usunąć zbędne wejścia, które nie są wymagane do kalkulacji zmiany T1 oraz T0. Dlatego prxedstawiona na początku tabela wejść nie zawierała wartości logicznych dla `Q1, ~Q1`
+Po analizie otrzymanych przez nas wartości T1 oraz T0 dla NEXT i PREVIOUS zdecydowaliśmy usunąć zbędne wejścia, które nie są wymagane do kalkulacji zmiany T1 oraz T0. Dlatego przedstawiona na początku tabela wejść nie zawierała wartości logicznych dla `Q1, ~Q1`
 
 Ostatecznie układ tego komponnetu wyglądał następująco:
 
@@ -265,7 +275,7 @@ Układ ten:
 - Zabezpiecza przed jednoczesnymi przyciśnięciami przycisków `NEXT` i `PREV` oraz `STOP` i `PLAY`.
 - Posiada licznik dwubitowy zdolny do przechowywania informacji o obecnym utworze.
 - Posiada wyświetlacz, który pokazuje numer obecnie granego utworu.
-- Umożliwia zatrzymać lub wznowić słuchanie utworu.
+- Umożliwia zatrzymanie lub wznowienie słuchania utworu.
 - Posiada diody informujące o stanie muzyki, czy jest ona obecnie odtwarzana czy też nie.
 
 ## Układ testujący
@@ -299,7 +309,7 @@ Przykładowe odczyty z analizatora:
 
 Ten podukład pozwala sprawdzić poprawność działania automatu. `Tester` porównuje otrzymywane na wyjściu wyniki z oczekiwanymi, które są podane wewnątrz generatora słów.
 
-Generator słów został wypełniony następującymi wartościami:
+Przykładowe wartości generatora słów.
 ![image](./assets/WordGenerator.png)
 
 Pierwsze 4 bity odpowiadają wartościom `PLAY, STOP, PREV, NEXT`. 9, 10 oraz 11 bit opisują kolejno oczekiwane wartości `Q0, Q1, PLAYING`.
