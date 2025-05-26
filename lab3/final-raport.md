@@ -165,6 +165,10 @@ Pominięcie to jest uzasadnione, ponieważ w działającym układzie taka sytuac
 
 W tabeli prawdy zastosowano oznaczenia `AQ2, AQ1, AQ0`, które odpowiadają wartościom bitów stanu po zareagowaniu na naciśnięcie przycisku.
 
+Opisane zostały również sekcje wystepujące w tabeli. Oznaczenie pod tytułem `Liczba, Przycisk` np `1 NEXT` opisuje stan czy muzyka gra i wciśnięty przycisk
+
+Dla przejrzystości analiz, każda sekcja tabeli została oznaczona etykietą w formacie Liczba, Przycisk (np. 1 NEXT). Pierwszy człon informuje, czy muzyka była odtwarzana (1) lub zatrzymana (0), a drugi wskazuje, który przycisk został naciśnięty.
+
 #### Logika dla `NEXT` i `PREV`:
 ![image](./assets-new/logika-mp3-next-prev.jpg)
 
@@ -181,5 +185,28 @@ Każdy z tych bloków — oznaczonych jako `T_NEXT`, `T_PREV`, `T_PLAY`, `T_STOP
 
 W kolejnych podsekcjach przedstawiamy osobno logikę każdego z tych komponentów.
 
+#### Logika `T_NEXT`
 
+![image](./assets-new/mp3-logic-next.png)
 
+#### Logika `T_PREV`
+
+![image](./assets-new/mp3-logic-prev.png)
+
+#### Logika `T_PLAY`
+
+![image](./assets-new/mp3-logic-play.png)
+
+#### Logika `T_STOP`
+
+![image](./assets-new/mp3-logic-stop.png)
+
+Każdy z powyższych komponentów generuje niezależnie sygnały wyjściowe `T2, T1, T0`, które odpowiadają za ewentualną zmianę odpowiednich bitów stanu (`Q2, Q1, Q0`). Ponieważ tylko jeden z komponentów może być aktywny w danym cyklu (zgodnie z działaniem `INPUT PARSER`), sygnały `T2, T1, T0` z każdego bloku są **łączone logiczną operacją OR**. 
+
+W rezultacie końcowe wartości `T2, T1, T0` są wynikiem działania **jednego aktywnego bloku logicznego**, co upraszcza konstrukcję układu i umożliwia niezależne projektowanie każdego komponentu.
+
+## Implementacja
+
+Po zaprojektowaniu i analizie logiki sterującej, przeszliśmy do implementacji kompletnego układu odtwarzacza MP3. W tej części przedstawiamy strukturę całego systemu oraz sposób, w jaki poszczególne komponenty zostały połączone w spójną całość.
+
+Realizacja zadania została wykonana w programie `MultiSim v14.2`
