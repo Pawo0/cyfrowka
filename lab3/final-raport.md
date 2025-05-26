@@ -363,14 +363,84 @@ Na potrzeby testów:
 
 Tak zbudowany układ pozwolił sprawdzić, czy logika w każdej sytuacji generuje poprawne sygnały zmiany stanu i czy odpowiadają one oczekiwanym zachowaniom systemu.
 
-#### Implementacja Logic Convertera
+#### Realizacja układu testowego
+
+![image](./assets-new/uklad-testowy.png)
+
+#### Co umożliwia układ testowy?
+
+Układ testowy pozwala na weryfikację poprawności działania poszczególnych elementów logicznych systemu. W przypadku wystąpienia błędu, system zwraca informacje, które umożliwiają dokładną analizę przyczyn nieprawidłowości, dzięki czemu diagnostyka jest znacznie prostsza.
+
+Przykładowe sygnały zwracane do analizatorów stanów logicznych przedstawiono poniżej:
+
+![image](./assets-new/stan-logiczny.png)
+
+Testowanie przebiega cyklicznie, poprzez generowanie wartości wejściowych `NEXT`, `PREV`, `PLAY`, `STOP`, a także aktualnego stanu `Q2`, `Q1`, `Q0` oraz oczekiwanych wartości `EX_Q2`, `EX_Q1`, `EX_Q0`, które są dostarczane przez generator słów.
+
+Przykładowe dane z generatora słów:
+
+![image](./assets-new/word-generator.png)
+
+---
+
+### Opis działania komponentów układu testowego
+
+Część komponentów wykorzystywanych w układzie testowym jest identyczna jak w podstawowym projekcie, dlatego ich opis zostanie pominięty. Jednakże, dla potrzeb testów konieczne było zaprojektowanie kilku nowych modułów.
+
+---
+
+### Logic Converter
 
 ![image](./assets-new/logic-converter.png)
 
-Układ ten realizuje funkcję przekształcenia sygnałów `T` w odpowiadające im zmiany stanów `Q`. Jego działanie odpowiada podstawowej logice przerzutnika typu T, zgodnie z równaniem:
+Komponent `Logic Converter` realizuje przekształcenie sygnałów `T` na odpowiadające im zmiany stanów `Q`. Jego działanie odpowiada podstawowej funkcji przerzutnika typu T, zgodnie z równaniem:
 
 ```
 Q_OUT = ¬Q · T + Q · ¬T
 ```
 
-Dzięki temu możliwe jest zasymulowanie zmiany stanu bitu na podstawie wartości `T`, bez konieczności fizycznego implementowania przerzutników — co w warunkach testowych pozwala uprościć projekt i przyspieszyć weryfikację poprawności działania logiki.
+Dzięki temu możliwa jest symulacja zmiany stanu poszczególnych bitów na podstawie wartości sygnałów `T`, bez konieczności fizycznej implementacji przerzutników. Takie podejście upraszcza konstrukcję układu testowego i przyspiesza proces weryfikacji poprawności działania logiki.
+
+---
+
+### Tester
+
+Moduł `Tester` odpowiada za porównywanie wartości faktycznych z wartościami oczekiwanymi oraz sygnalizowanie wystąpienia błędów. W przypadku różnicy między aktualnym stanem (`Q2, Q1, Q0`) a wartością oczekiwaną (`EX_Q2, EX_Q1, EX_Q0`), układ generuje odpowiedni sygnał błędu.
+
+Układ rozróżnia dwa typy błędów:
+
+* **Błędy lokalne** — dotyczą pojedynczych bitów `Q2`, `Q1`, `Q0` i są sygnalizowane indywidualnymi diodami LED na module testowym.
+* **Błąd globalny** — aktywowany przy pierwszym wykrytym błędzie i pozostaje aktywny do zakończenia testu, co pozwala na szybkie wykrycie problemu w całym systemie.
+
+Wszystkie sygnały błędów są dostępne na wyjściach modułu, co umożliwia ich podłączenie do systemów monitorujących oraz dalszą analizę.
+
+![image](./assets-new/tester.png)
+
+---
+
+### Tester ➜ ERR Detector
+
+Moduł `ERR Detector` odpowiada za porównanie wartości oczekiwanych z rzeczywistymi dopiero w momencie wykrycia spadku sygnału na wejściu `READY`. Wejście to sygnalizuje gotowość generatora słów, co oznacza, że wartości są stabilne i można je bezpiecznie wykorzystać do porównań.
+
+Wykrywanie spadku napięcia zostało zastosowane celowo, aby dać czas pozostałym komponentom na wykonanie swojej logiki i ustabilizowanie sygnałów. Dzięki temu unikamy błędów wynikających z opóźnień i desynchronizacji pomiędzy elementami systemu.
+
+Działanie `ERR Detector` jest analogiczne do modułu `Impulse Detector`, jednak w przeciwieństwie do niego wykrywa **spadek** napięcia, podczas gdy `Impulse Detector` reaguje na jego wzrost.
+
+![image](./assets-new/error-detector.png)
+
+### Podsumowanie układu testowego
+
+Układ testowy został zaprojektowany w celu kompleksowej weryfikacji poprawności działania kluczowych komponentów systemu sterującego odtwarzaczem MP3. Dzięki modułom takim jak generator słów, tester, logic converter oraz ERR Detector, możliwe jest symulowanie pełnego cyklu pracy układu, monitorowanie aktualnych i oczekiwanych stanów oraz szybkie wykrywanie i lokalizowanie ewentualnych błędów.
+
+Zastosowanie detekcji impulsów i spadków napięcia pozwala na synchronizację działań poszczególnych modułów, eliminując błędy wynikające z asynchronicznego działania lub opóźnień czasowych.
+
+Dzięki temu podejściu cały proces testowania jest nie tylko automatyczny, ale także precyzyjny i powtarzalny, co znacznie usprawnia proces debugowania oraz daje pewność poprawnej implementacji układu sterującego.
+
+## Inne zastosowania
+
+Projektowany układ może znaleźć zastosowanie także poza funkcją odtwarzacza MP3. Świetnie sprawdziłby się jako kontroler wyświetlania treści reklamowych na ekranie telewizora lub monitora. Mając do dyspozycji cztery różne reklamy, układ umożliwiałby wybór i odtwarzanie jednej z nich.
+
+Dodatkowo, możliwe jest rozbudowanie systemu o funkcję automatycznej zmiany reklam, które wówczas byłyby wyświetlane kolejno, jedna po drugiej, co pozwoliłoby na dynamiczne i efektywne zarządzanie prezentacją treści.
+
+![image](./assets/zastosowanie.png)
+
