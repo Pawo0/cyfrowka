@@ -84,6 +84,14 @@ Korzystając z wcześniej przygotowanych projektów Automatu stworzyliśmy ukła
 
 Wejścia `NEXT`, `PREV`, `PLAY`, `STOP` to po prostu **przyciski**, które w obecnej implementacji mają formę **przełączników dwustanowych** (mogą przyjmować wartość `0` lub `1`). Aby zasymulować rzeczywiste zachowanie przycisku (czyli krótkiego impulsu), zastosowaliśmy dodatkowy komponent — `INPUT PARSER`.
 
+W celu rozwiania wątpliwości — założyliśmy, że do implementacji modułu `COUNTER` wykorzystamy przerzutniki typu T jako bazowe elementy pamięci. Dzięki nim możliwe będzie proste zliczanie oraz zmiana stanu układu przy kolejnych impulsach.
+
+Poniżej znajduje się schemat przykładowej realizacji takiego licznika z przerzutnikami T:
+
+![image](./assets-new/mp3-controler.png)
+
+Zmienne T sterują zmianą konkretnych bitów, natomiast zmienne Q odpowiadają za przekazywanie informacji o aktualnym stanie układu.
+
 #### Komponent `INPUT PARSER`
 
 Ten moduł odpowiada za przetwarzanie sygnałów wejściowych z przycisków i składa się z dwóch podkomponentów:
@@ -207,6 +215,162 @@ W rezultacie końcowe wartości `T2, T1, T0` są wynikiem działania **jednego a
 
 ## Implementacja
 
-Po zaprojektowaniu i analizie logiki sterującej, przeszliśmy do implementacji kompletnego układu odtwarzacza MP3. W tej części przedstawiamy strukturę całego systemu oraz sposób, w jaki poszczególne komponenty zostały połączone w spójną całość.
+Po zaprojektowaniu i analizie logiki sterującej przeszliśmy do implementacji kompletnego układu odtwarzacza MP3. W tej części przedstawiamy strukturę całego systemu oraz sposób, w jaki poszczególne komponenty zostały połączone w spójną i działającą całość.
 
-Realizacja zadania została wykonana w programie `MultiSim v14.2`
+Realizacja zadania została przeprowadzona w programie **Multisim v14.2**.
+
+Poniżej prezentujemy główny schemat układu wraz z porównaniem do zaprojektowanego wcześniej modelu teoretycznego. Opis działania poszczególnych komponentów został przedstawiony we wcześniejszych sekcjach — poniżej skupiamy się na ich wzajemnych połączeniach i zastosowanych uproszczeniach nazw.
+
+---
+
+### Finalny układ
+
+![image](./assets-new/uklad.png)
+
+### Komponent `INPUT PARSER`
+
+![image](./assets-new/input-parser-uklad.png)
+
+### Wcześniej zaprojektowany schemat (dla porównania)
+
+![image](./assets-new/uklad_schemat.png)
+
+---
+
+Finalny układ nie odbiega znacząco od zaplanowanego wcześniej schematu. Wprowadziliśmy jednak kilka drobnych zmian nazewniczych dla większej przejrzystości:
+
+* Komponent logiczny `MP3 LOGIC` został oznaczony jako `LOGIC`, ponieważ jego rola w kontekście całego układu była oczywista.
+* Komponent `COUNTER` został przemianowany na `MP3 CONTROLLER`, aby lepiej oddać jego funkcję — trzybitowy stan tego komponentu opisuje nie tylko numer utworu, ale również stan odtwarzania. Poprzednia nazwa mogła być niejednoznaczna.
+
+---
+
+## Przedstawienie komponentów
+
+Poniżej znajduje się schematyczne przedstawienie każdego z głównych komponentów oraz uzasadnienie ich działania. Komponenty są omówione w kolejności odpowiadającej ich przetwarzaniu sygnału — od momentu naciśnięcia przycisku aż do prezentacji danych na wyjściu.
+
+---
+
+### Input Parser ➜ Input Detector
+
+Układ `Input Detector` odpowiada za przekształcenie sygnału z przycisków (który w symulacji ma postać stałego stanu wysokiego `1`) w impuls trwający **dokładnie jeden cykl zegara**.
+
+![image](./assets-new/input-detector.png)
+
+Działanie układu opiera się na detekcji **zbocza narastającego** sygnału — czyli momentu, w którym stan zmienia się z `0` na `1`. W tym celu zastosowano **przerzutniki typu D**, które zapamiętują poprzedni stan każdego wejścia (`NEXT`, `PREV`, `PLAY`, `STOP`).
+
+Dla każdego wejścia zastosowano osobny tor:
+
+* Sygnał wejściowy trafia na wejście `D` przerzutnika, a jego wyjście `Q` reprezentuje poprzedni stan.
+* Wyjście `Q` podawane jest do bramki NOT, której wynik (`¬Q`) informuje, czy wcześniej był stan niski.
+* Jednocześnie bieżący sygnał jest podawany do bramki AND razem z zanegowanym poprzednim stanem.
+* W wyniku tego bramka AND wygeneruje impuls (`1`) tylko w chwili zmiany z `0` na `1`.
+
+Dzięki temu sygnał z przycisku zostaje przekształcony w **krótkotrwały impuls** o długości jednego cyklu zegara, co znacząco ułatwia dalsze przetwarzanie sygnałów i eliminuje potencjalne problemy z długimi stanami wysokimi.
+
+---
+
+### Input Parser ➜ Input Logic
+
+Komponent `Input Logic` odpowiedzialny jest za dopuszczenie tylko **jednego aktywnego sygnału wejściowego** w danym cyklu. Jeśli użytkownik naciśnie więcej niż jeden przycisk naraz, układ nie przepuszcza żadnego z nich, zapewniając jednoznaczność i stabilność działania.
+
+![image](./assets-new/input-logic.png)
+
+Zastosowana logika wynika bezpośrednio z wcześniej przedstawionej analizy funkcjonalnej:
+
+![image](./assets-new/logika-input-parser.jpg)
+
+Na podstawie tej tabeli zostały stworzone wyrażenia logiczne dla każdego wyjścia (`NEXT_O`, `PREV_O`, `PLAY_O`, `STOP_O`). Każde z tych wyjść aktywuje się **tylko wtedy**, gdy dany przycisk jest wciśnięty, a pozostałe mają wartość `0`. Taka konstrukcja zapobiega błędnej interpretacji, gdyby użytkownik próbował aktywować kilka funkcji jednocześnie.
+
+---
+
+### Logic
+
+Komponent `Logic` odpowiedzialny jest za przetworzenie danych wejściowych z przycisków `NEXT`, `PREV`, `PLAY`, `STOP` na sygnały sterujące `T2`, `T1`, `T0`, które wskazują, **które bity stanu powinny ulec zmianie**.
+
+![image](./assets-new/logic.png)
+
+W ramach tego podukładu zaimplementowano wcześniej zaprojektowane komponenty `T_NEXT`, `T_PREV`, `T_PLAY`, `T_STOP`, dla których wyznaczone zostały osobne równania logiczne. Każdy z tych podukładów jest aktywny tylko w momencie, gdy odpowiadający mu przycisk jest aktywny (`1`), dzięki czemu logika została uproszczona i rozdzielona na osobne przypadki.
+
+Poniżej przedstawiono zestawienie schematów tych podukładów oraz odpowiadających im tabel Karnaugh:
+
+---
+
+#### Podukład `T_NEXT`
+
+Schemat układu:
+![image](./assets-new/logic-t-next.png)
+
+Tabela Karnaugh:
+![image](./assets-new/mp3-logic-next.png)
+
+---
+
+#### Podukład `T_PREV`
+
+Schemat układu:
+![image](./assets-new/logic-t-prev.png)
+
+Tabela Karnaugh:
+![image](./assets-new/mp3-logic-prev.png)
+
+---
+
+#### Podukład `T_PLAY`
+
+Schemat układu:
+![image](./assets-new/logic-t-play.png)
+
+Tabela Karnaugh:
+![image](./assets-new/mp3-logic-play.png)
+
+---
+
+#### Podukład `T_STOP`
+
+Schemat układu:
+![image](./assets-new/logic-t-stop.png)
+
+Tabela Karnaugh:
+![image](./assets-new/mp3-logic-stop.png)
+
+---
+
+### MP3 Controler
+
+Komponent `MP3 Controler` odpowiedzialny jest za **przechowywanie aktualnego stanu odtwarzacza MP3**. Stan ten opisany jest za pomocą 3-bitowej liczby (`Q2, Q1, Q0`), gdzie najstarszy bit (`Q2`) informuje, czy muzyka jest aktualnie odtwarzana, natomiast dwa pozostałe (`Q1, Q0`) wskazują numer ścieżki.
+
+Układ został zrealizowany za pomocą trzech przerzutników typu T, które zmieniają swój stan zgodnie z wartościami `T2`, `T1`, `T0` wyznaczonymi przez moduł `Logic`.
+
+![image](./assets-new/mp3-controler.png)
+
+---
+
+Wszystkie wcześniej opisane komponenty, działając wspólnie, realizują funkcjonalność umożliwiającą wybór utworu oraz jego odtworzenie zgodnie z logiką przyjętą w projekcie.
+
+#### Finalny schemat realizujący założone zadanie
+
+![image](./assets-new/uklad.png)
+
+## Układ testowy
+
+W celu weryfikacji poprawności działania logiki układu, opracowany został uproszczony układ testowy. Skupiliśmy się w nim na przetestowaniu fragmentów odpowiedzialnych za zmianę stanu utworu oraz jego odtwarzanie i zatrzymywanie — czyli logiki komponentów `LOGIC`, `T_NEXT`, `T_PREV`, `T_PLAY`, `T_STOP`.
+
+Na potrzeby testów:
+
+* **Komponent `MP3 CONTROLER`**, odpowiedzialny za przechowywanie aktualnego stanu (`Q2, Q1, Q0`), został **zastąpiony ręcznie ustawianymi sygnałami wejściowymi**, co pozwoliło na precyzyjne testowanie konkretnych przypadków logicznych.
+* **Komponent `INPUT PARSER`** został **uproszczony** — pominięto część odpowiedzialną za detekcję impulsów, skupiając się wyłącznie na reakcjach układu na konkretne, pojedyncze sygnały wejściowe (`NEXT`, `PREV`, `PLAY`, `STOP`).
+* **Sygnały `T2, T1, T0`**, będące wynikiem działania logiki, zostały **zmapowane bezpośrednio na linie `Q2, Q1, Q0`** dzięki komponentowi `Logic Converter`, co pozwala zasymulować zachowanie przerzutników typu T oraz obserwować zmiany stanu układu na podstawie ich aktywacji.
+
+Tak zbudowany układ pozwolił sprawdzić, czy logika w każdej sytuacji generuje poprawne sygnały zmiany stanu i czy odpowiadają one oczekiwanym zachowaniom systemu.
+
+#### Implementacja Logic Convertera
+
+![image](./assets-new/logic-converter.png)
+
+Układ ten realizuje funkcję przekształcenia sygnałów `T` w odpowiadające im zmiany stanów `Q`. Jego działanie odpowiada podstawowej logice przerzutnika typu T, zgodnie z równaniem:
+
+```
+Q_OUT = ¬Q · T + Q · ¬T
+```
+
+Dzięki temu możliwe jest zasymulowanie zmiany stanu bitu na podstawie wartości `T`, bez konieczności fizycznego implementowania przerzutników — co w warunkach testowych pozwala uprościć projekt i przyspieszyć weryfikację poprawności działania logiki.
