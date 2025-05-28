@@ -11,8 +11,9 @@ entity debounce is
 end debounce;
 
 architecture Behavioral of debounce is
-    constant DEBOUNCE_LIMIT : unsigned(17 downto 0) := to_unsigned(16#FFFFF#, 18); 
-    signal counter : unsigned(17 downto 0) := (others => '0');
+    -- 20 ms przy clk 25 MHz = 20ms / 40ns = 500000 cykli
+    constant DEBOUNCE_LIMIT : unsigned(18 downto 0) := to_unsigned(500000, 19);
+    signal counter : unsigned(18 downto 0) := (others => '0');
     signal btn_sync : STD_LOGIC := '0';
 begin
     process(clk)
