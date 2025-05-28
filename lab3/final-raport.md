@@ -136,7 +136,7 @@ Założeniem działania komponentu `LOGIC` jest to, że **wyjście może być ak
 
 #### Tabela wartości logicznych
 
-![image](./assets-new/logika-input-parser.jpg)
+<img src="./assets-new/logika-input-parser.jpg" style="max-height: 900px">
 
 Na podstawie analizy uzyskaliśmy następujące zależności logiczne dla sygnałów wyjściowych: `NEXT_O`, `PREV_O`, `PLAY_O`, `STOP_O`:
 
@@ -178,10 +178,10 @@ Opisane zostały również sekcje wystepujące w tabeli. Oznaczenie pod tytułem
 Dla przejrzystości analiz, każda sekcja tabeli została oznaczona etykietą w formacie Liczba, Przycisk (np. 1 NEXT). Pierwszy człon informuje, czy muzyka była odtwarzana (1) lub zatrzymana (0), a drugi wskazuje, który przycisk został naciśnięty.
 
 #### Logika dla `NEXT` i `PREV`:
-![image](./assets-new/logika-mp3-next-prev.jpg)
+<img src="./assets-new/logika-mp3-next-prev.jpg" style="max-height: 800px">
 
 #### Logika dla `PLAY` i `STOP`:
-![image](./assets-new/logika-mp3-play-stop.jpg)
+<img src="./assets-new/logika-mp3-play-stop.jpg" style="max-height: 800px">
 
 ---
 
@@ -195,19 +195,19 @@ W kolejnych podsekcjach przedstawiamy osobno logikę każdego z tych komponentó
 
 #### Logika `T_NEXT`
 
-![image](./assets-new/mp3-logic-next.png)
+<img src="./assets-new/mp3-logic-next.png" style="max-height: 1000px">
 
 #### Logika `T_PREV`
 
-![image](./assets-new/mp3-logic-prev.png)
+<img src="./assets-new/mp3-logic-prev.png" style="max-height: 1000px">
 
 #### Logika `T_PLAY`
 
-![image](./assets-new/mp3-logic-play.png)
+<img src="./assets-new/mp3-logic-play.png" style="max-height: 1000px">
 
 #### Logika `T_STOP`
 
-![image](./assets-new/mp3-logic-stop.png)
+<img src="./assets-new/mp3-logic-stop.png" style="max-height: 1000px">
 
 Każdy z powyższych komponentów generuje niezależnie sygnały wyjściowe `T2, T1, T0`, które odpowiadają za ewentualną zmianę odpowiednich bitów stanu (`Q2, Q1, Q0`). Ponieważ tylko jeden z komponentów może być aktywny w danym cyklu (zgodnie z działaniem `INPUT PARSER`), sygnały `T2, T1, T0` z każdego bloku są **łączone logiczną operacją OR**. 
 
@@ -272,7 +272,7 @@ Komponent `Input Logic` odpowiedzialny jest za dopuszczenie tylko **jednego akty
 
 Zastosowana logika wynika bezpośrednio z wcześniej przedstawionej analizy funkcjonalnej:
 
-![image](./assets-new/logika-input-parser.jpg)
+<img src="./assets-new/logika-input-parser.jpg" style="max-height: 800px">
 
 Na podstawie tej tabeli zostały stworzone wyrażenia logiczne dla każdego wyjścia (`NEXT_O`, `PREV_O`, `PLAY_O`, `STOP_O`). Każde z tych wyjść aktywuje się **tylko wtedy**, gdy dany przycisk jest wciśnięty, a pozostałe mają wartość `0`. Taka konstrukcja zapobiega błędnej interpretacji, gdyby użytkownik próbował aktywować kilka funkcji jednocześnie.
 
@@ -296,7 +296,7 @@ Schemat układu:
 ![image](./assets-new/logic-t-next.png)
 
 Tabela Karnaugh:
-![image](./assets-new/mp3-logic-next.png)
+<img src="./assets-new/mp3-logic-next.png" style="max-height: 1000px">
 
 ---
 
@@ -306,7 +306,7 @@ Schemat układu:
 ![image](./assets-new/logic-t-prev.png)
 
 Tabela Karnaugh:
-![image](./assets-new/mp3-logic-prev.png)
+<img src="./assets-new/mp3-logic-prev.png" style="max-height: 1000px">
 
 ---
 
@@ -316,7 +316,7 @@ Schemat układu:
 ![image](./assets-new/logic-t-play.png)
 
 Tabela Karnaugh:
-![image](./assets-new/mp3-logic-play.png)
+<img src="./assets-new/mp3-logic-play.png" style="max-height: 1000px">
 
 ---
 
@@ -326,7 +326,7 @@ Schemat układu:
 ![image](./assets-new/logic-t-stop.png)
 
 Tabela Karnaugh:
-![image](./assets-new/mp3-logic-stop.png)
+<img src="./assets-new/mp3-logic-stop.png" style="max-height: 1000px">
 
 ---
 
@@ -394,12 +394,7 @@ Komponent `Logic Converter` realizuje przekształcenie sygnałów `T` na odpowia
 Q_OUT = ¬Q · T + Q · ¬T
 ```
 
-|Q|T|OUT_Q|
-|-|-|-|
-|0|0|0|
-|0|1|1|
-|1|0|1|
-|1|1|0|
+<img src="./assets-new/T-logic.png" style="max-height: 160px">
 
 Równanie to odpowiada działaniu przerzutnika typu T i upraszcza się do operacji XOR:
 
