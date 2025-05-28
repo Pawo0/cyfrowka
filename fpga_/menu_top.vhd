@@ -17,11 +17,18 @@ end menu_top;
 architecture Behavioral of menu_top is
     signal cnt_l   : STD_LOGIC_VECTOR(3 downto 0) := "0000";
     signal cnt_r   : STD_LOGIC_VECTOR(3 downto 0) := "0000";
-
+    signal btn_l_d, btn_r_d : STD_LOGIC;
     component seg7_decoder
         Port (
             bcd : in  STD_LOGIC_VECTOR(3 downto 0);
             seg : out STD_LOGIC_VECTOR(6 downto 0)
+        );
+    end component;
+    component debounce is
+        Port (
+            clk     : in  STD_LOGIC;
+            btn_in  : in  STD_LOGIC;
+            btn_out : out STD_LOGIC
         );
     end component;
 begin
@@ -31,7 +38,7 @@ begin
     process(clk)
     begin
         if rising_edge(clk) then
-            if btn_l = '1' then
+            if btn_l_d = '1' then
                 if cnt_l = "1001" then
                     cnt_l <= "0000";
                 else
@@ -39,7 +46,7 @@ begin
                 end if;
             end if;
 
-            if btn_r = '1' then
+            if btn_r_d = '1' then
                 cnt_r <= cnt_l;
             end if;
         end if;
