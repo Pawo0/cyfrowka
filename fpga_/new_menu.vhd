@@ -21,13 +21,12 @@ architecture Behavioral of menu_top is
     signal r_counter : INTEGER := 0;
     signal l_repeat_interval : INTEGER := 1000000;
     signal r_repeat_interval : INTEGER := 1000000;
+    signal btn_l_d, btn_r_d : STD_LOGIC;
+    signal btn_l_prev, btn_r_prev : STD_LOGIC := '0';
 
-    constant HOLD_THRESHOLD : INTEGER := 1000000;  -- próg rozpoczęcia auto-repeat
-    constant MIN_INTERVAL   : INTEGER := 200000;   -- maksymalna szybkość powtarzania
-    constant ACCELERATION_STEP : INTEGER := 50000; -- przyspieszenie co krok
-
-    signal btn_l_prev : STD_LOGIC := '0';
-    signal btn_r_prev : STD_LOGIC := '0';
+    constant HOLD_THRESHOLD : INTEGER := 1000000;
+    constant MIN_INTERVAL   : INTEGER := 200000;
+    constant ACCELERATION_STEP : INTEGER := 50000;
 
     component seg7_decoder
         Port (
@@ -35,62 +34,93 @@ architecture Behavioral of menu_top is
             seg : out STD_LOGIC_VECTOR(6 downto 0)
         );
     end component;
+
+    component debounce is
+        Port (
+            clk     : in  STD_LOGIC;
+            btn_in  : in  STD_LOGIC;
+            btn_out : out STD_LOGIC
+        );
+    end component;
 begin
-        -- debounce dla przycisków
-    debounce_l: debounce port map(clk, btn_l, btn_l_d);
-    debounce_r: debounce port map(clk, btn_r, btn_r_d);
+    debounce_l: debounce port map(clk => clk, btn_in => btn_l, btn_out => btn_l_d);
+    debounce_r: debounce port map(clk => clk, btn_in => btn_r, btn_out => btn_r_d);
+
     process(clk)
     begin
         if rising_edge(clk) then
-            -- Auto-repeat left button (increment)
-            if btn_l = '1' then
-                l_counter <= l_counter + 1;
-                if l_counter = 1 or l_counter > l_repeat_interval then
+            
+
+            --  oba przyciski wcisniete
+            if btn_l_d = '1' and btn_r_d = '1' then
+                cnt_r <= cnt_l;
+
+            -- LEWY przycisk
+            elsif btn_l_d = '1' then
+                -- klikni?cie
+                if btn_l_prev = '0' then
                     if cnt_l = "1001" then
                         cnt_l <= "0000";
                     else
                         cnt_l <= cnt_l + 1;
                     end if;
+                else
+                    -- auto-repeat
+                    l_counter <= l_counter + 1;
+                    if l_counter > l_repeat_interval then
+                        if cnt_l = "1001" then
+                            cnt_l <= "0000";
+                        else
+                            cnt_l <= cnt_l + 1;
+                        end if;
 
-                    if l_repeat_interval > MIN_INTERVAL then
-                        l_repeat_interval <= l_repeat_interval - ACCELERATION_STEP;
+                        if l_repeat_interval > MIN_INTERVAL then
+                            l_repeat_interval <= l_repeat_interval - ACCELERATION_STEP;
+                        end if;
+
+                        l_counter <= 0;
                     end if;
-
-                    l_counter <= 0;
                 end if;
-            else
-                l_counter <= 0;
-                l_repeat_interval <= HOLD_THRESHOLD;
-            end if;
 
-            -- Auto-repeat right button (decrement)
-            if btn_r = '1' then
-                r_counter <= r_counter + 1;
-                if r_counter = 1 or r_counter > r_repeat_interval then
+            -- PRAWY przycisk
+            elsif btn_r_d = '1' then
+                if btn_r_prev = '0' then
                     if cnt_l = "0000" then
                         cnt_l <= "1001";
                     else
                         cnt_l <= cnt_l - 1;
                     end if;
+                else
+                    r_counter <= r_counter + 1;
+                    if r_counter > r_repeat_interval then
+                        if cnt_l = "0000" then
+                            cnt_l <= "1001";
+                        else
+                            cnt_l <= cnt_l - 1;
+                        end if;
 
-                    if r_repeat_interval > MIN_INTERVAL then
-                        r_repeat_interval <= r_repeat_interval - ACCELERATION_STEP;
+                        if r_repeat_interval > MIN_INTERVAL then
+                            r_repeat_interval <= r_repeat_interval - ACCELERATION_STEP;
+                        end if;
+
+                        r_counter <= 0;
                     end if;
-
-                    r_counter <= 0;
                 end if;
+
+            -- reset licznikow
             else
                 r_counter <= 0;
                 r_repeat_interval <= HOLD_THRESHOLD;
+                l_counter <= 0;
+                l_repeat_interval <= HOLD_THRESHOLD;
             end if;
-
-            -- Zatwierdzenie: oba przyciski jednocześnie
-            if btn_l = '1' and btn_r = '1' then
-                cnt_r <= cnt_l;
-            end if;
+            btn_l_prev <= btn_l_d;
+            btn_r_prev <= btn_r_d;
         end if;
+
     end process;
 
-    u1: seg7_decoder port map(cnt_l, seg_l);
-    u2: seg7_decoder port map(cnt_r, seg_r);
+    u1: seg7_decoder port map(bcd => cnt_l, seg => seg_l);
+    u2: seg7_decoder port map(bcd => cnt_r, seg => seg_r);
 end Behavioral;
+
