@@ -24,9 +24,10 @@ architecture Behavioral of menu_top is
     signal btn_l_d, btn_r_d : STD_LOGIC;
     signal btn_l_prev, btn_r_prev : STD_LOGIC := '0';
 
-    constant HOLD_THRESHOLD : INTEGER := 1000000;
-    constant MIN_INTERVAL   : INTEGER := 200000;
-    constant ACCELERATION_STEP : INTEGER := 50000;
+    constant HOLD_THRESHOLD : INTEGER := 50000000;    -- 2 s
+    constant MIN_INTERVAL   : INTEGER := 12500000;    -- 0.5 s
+    constant ACCELERATION_STEP : INTEGER := 6250000;  -- 0.25 s
+
 
     component seg7_decoder
         Port (
