@@ -388,13 +388,27 @@ Część komponentów wykorzystywanych w układzie testowym jest identyczna jak 
 
 ![image](./assets-new/logic-converter.png)
 
-Komponent `Logic Converter` realizuje przekształcenie sygnałów `T` na odpowiadające im zmiany stanów `Q`. Jego działanie odpowiada podstawowej funkcji przerzutnika typu T, zgodnie z równaniem:
+Komponent `Logic Converter` realizuje przekształcenie sygnałów `T` na odpowiadające im zmiany stanów `Q`, zgodnie z równaniem:
 
 ```
 Q_OUT = ¬Q · T + Q · ¬T
 ```
 
-Dzięki temu możliwa jest symulacja zmiany stanu poszczególnych bitów na podstawie wartości sygnałów `T`, bez konieczności fizycznej implementacji przerzutników. Takie podejście upraszcza konstrukcję układu testowego i przyspiesza proces weryfikacji poprawności działania logiki.
+|Q|T|OUT_Q|
+|-|-|-|
+|0|0|0|
+|0|1|1|
+|1|0|1|
+|1|1|0|
+
+Równanie to odpowiada działaniu przerzutnika typu T i upraszcza się do operacji XOR:
+
+```
+Q_OUT = Q ⊕ T
+```
+
+Dzięki temu możliwa jest symulacja zmiany stanu bitów na podstawie sygnałów `T` bez fizycznej implementacji przerzutników, co upraszcza konstrukcję układu testowego i przyspiesza weryfikację logiki.
+
 
 ---
 
