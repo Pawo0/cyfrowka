@@ -25,7 +25,9 @@ architecture Behavioral of menu_top is
         );
     end component;
 begin
-
+        -- debounce dla przycisków
+    debounce_l: debounce port map(clk, btn_l, btn_l_d);
+    debounce_r: debounce port map(clk, btn_r, btn_r_d);
     process(clk)
     begin
         if rising_edge(clk) then
