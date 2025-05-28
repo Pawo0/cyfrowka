@@ -47,9 +47,9 @@ Choć podejście to pozwalało na czytelne rozdzielenie funkcji, ostatecznie zre
 
 ## Projekt automatu (finalna koncepcja)
 
-W finalnej wersji projektu zdecydowaliśmy się na reprezentację stanu odtwarzacza MP3 za pomocą **trzebitowej liczby**. 
+W finalnej wersji projektu zdecydowaliśmy się na reprezentację stanu odtwarzacza MP3 za pomocą **trzybitowej liczby**. 
 
-- **Najstarszy bit** (MSB) przechowuje informację o tym, czy muzyka jest aktualnie **odtwarzana (1)**, czy **zatrzymana (0)**.  
+- **Najstarszy bit** przechowuje informację o tym, czy muzyka jest aktualnie **odtwarzana (1)**, czy **zatrzymana (0)**.  
 - **Dwa młodsze bity** odpowiadają za **numer aktualnego utworu** (od 0 do 3).
 
 ![image](./assets-new/schemat_bit.png)
@@ -82,7 +82,7 @@ Korzystając z wcześniej przygotowanych projektów Automatu stworzyliśmy ukła
 
 ### Wyjaśnienie działania układu
 
-Wejścia `NEXT`, `PREV`, `PLAY`, `STOP` to po prostu **przyciski**, które w obecnej implementacji mają formę **przełączników dwustanowych** (mogą przyjmować wartość `0` lub `1`). Aby zasymulować rzeczywiste zachowanie przycisku (czyli krótkiego impulsu), zastosowaliśmy dodatkowy komponent — `INPUT PARSER`.
+Wejścia `NEXT`, `PREV`, `PLAY`, `STOP` to po prostu **przyciski**, które w obecnej implementacji mają formę **przełączników dwustanowych** (mogą przyjmować wartość `0` lub `1`). Aby zasymulować rzeczywiste zachowanie przycisku (czyli krótkiego impulsu), zastosowaliśmy dodatkowy komponent — `INPUT PARSER`. Słuzy on również do blokowania sygnału w przypadku gdy użytkownik wciśnie więcej niż jeden przycisk.
 
 W celu rozwiania wątpliwości — założyliśmy, że do implementacji modułu `COUNTER` wykorzystamy przerzutniki typu T jako bazowe elementy pamięci. Dzięki nim możliwe będzie proste zliczanie oraz zmiana stanu układu przy kolejnych impulsach.
 
@@ -237,12 +237,7 @@ Poniżej prezentujemy główny schemat układu wraz z porównaniem do zaprojekto
 
 ---
 
-Finalny układ nie odbiega znacząco od zaplanowanego wcześniej schematu. Wprowadziliśmy jednak kilka drobnych zmian nazewniczych dla większej przejrzystości:
-
-* Komponent logiczny `MP3 LOGIC` został oznaczony jako `LOGIC`, ponieważ jego rola w kontekście całego układu była oczywista.
-* Komponent `COUNTER` został przemianowany na `MP3 CONTROLLER`, aby lepiej oddać jego funkcję — trzybitowy stan tego komponentu opisuje nie tylko numer utworu, ale również stan odtwarzania. Poprzednia nazwa mogła być niejednoznaczna.
-
----
+Finalny układ nie odbiega znacząco od zaplanowanego wcześniej schematu. Wprowadziliśmy jednak kilka drobnych zmian nazewniczych dla większej przejrzystości.
 
 ## Przedstawienie komponentów
 
@@ -250,9 +245,9 @@ Poniżej znajduje się schematyczne przedstawienie każdego z głównych kompone
 
 ---
 
-### Input Parser ➜ Input Detector
+### Input Parser ➜ Impulse Detector
 
-Układ `Input Detector` odpowiada za przekształcenie sygnału z przycisków (który w symulacji ma postać stałego stanu wysokiego `1`) w impuls trwający **dokładnie jeden cykl zegara**.
+Układ `Impulse Detector` odpowiada za przekształcenie sygnału z przycisków (który w symulacji ma postać stałego stanu wysokiego `1`) w impuls trwający **dokładnie jeden cykl zegara**.
 
 ![image](./assets-new/input-detector.png)
 
@@ -428,19 +423,11 @@ Działanie `ERR Detector` jest analogiczne do modułu `Impulse Detector`, jednak
 
 ![image](./assets-new/error-detector.png)
 
-### Podsumowanie układu testowego
-
-Układ testowy został zaprojektowany w celu kompleksowej weryfikacji poprawności działania kluczowych komponentów systemu sterującego odtwarzaczem MP3. Dzięki modułom takim jak generator słów, tester, logic converter oraz ERR Detector, możliwe jest symulowanie pełnego cyklu pracy układu, monitorowanie aktualnych i oczekiwanych stanów oraz szybkie wykrywanie i lokalizowanie ewentualnych błędów.
-
-Zastosowanie detekcji impulsów i spadków napięcia pozwala na synchronizację działań poszczególnych modułów, eliminując błędy wynikające z asynchronicznego działania lub opóźnień czasowych.
-
-Dzięki temu podejściu cały proces testowania jest nie tylko automatyczny, ale także precyzyjny i powtarzalny, co znacznie usprawnia proces debugowania oraz daje pewność poprawnej implementacji układu sterującego.
-
 ## Inne zastosowania
 
 Projektowany układ może znaleźć zastosowanie także poza funkcją odtwarzacza MP3. Świetnie sprawdziłby się jako kontroler wyświetlania treści reklamowych na ekranie telewizora lub monitora. Mając do dyspozycji cztery różne reklamy, układ umożliwiałby wybór i odtwarzanie jednej z nich.
 
 Dodatkowo, możliwe jest rozbudowanie systemu o funkcję automatycznej zmiany reklam, które wówczas byłyby wyświetlane kolejno, jedna po drugiej, co pozwoliłoby na dynamiczne i efektywne zarządzanie prezentacją treści.
 
-![image](./assets/zastosowanie.png)
+![image](./assets-new/zastosowanie.png)
 
