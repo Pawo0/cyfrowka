@@ -1,0 +1,325 @@
+<!DOCTYPE html><html><head>
+      <title>final-raport</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\McPla\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.18\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="technika-cyfrowa---sprawozdanie-3">Technika Cyfrowa - Sprawozdanie 3 </h1>
+<h2 id="projekt-odtwarzacza-mp3">Projekt odtwarzacza MP3 </h2>
+<h3 id="autorzy">Autorzy </h3>
+<ul>
+<li>Kacper Feliks</li>
+<li>Robert Raniszewski</li>
+<li>Paweł Czajczyk</li>
+<li>Mateusz Pawliczek</li>
+</ul>
+<h2 id="opis-ćwiczenia">Opis ćwiczenia </h2>
+<p>Proszę zaprojektować automat mogący posłużyć do sterowania jakimś prostym odtwarzaczem <strong>plików muzycznych mp3.</strong></p>
+<p>Układ powinien mieć następujące przyciski oraz odpowiadające im sygnały i wskaźniki:</p>
+<ul>
+<li>STOP</li>
+<li>PLAY</li>
+<li>NEXT</li>
+<li>PREVIOUS</li>
+</ul>
+<p>oraz powinien posiadać <strong>dwubitowe wyjście binarne</strong> określające numer utworu.</p>
+<h2 id="założenia-projektu">Założenia Projektu </h2>
+<p>Celem zadania było zaprojektowanie prostego układu MP3 sterowanego przez pojedynczy automat oraz cztery przyciski: <code>PLAY, STOP, NEXT, PREVIOUS</code>.</p>
+<p>Przyjęto następujące założenia realizacyjne:</p>
+<ul>
+<li>
+<p>Automat przechowuje informację o <strong>aktualnie odtwarzanym utworze</strong> oraz o tym, czy utwór jest <strong>odtwarzany czy zatrzymany</strong>.</p>
+</li>
+<li>
+<p>Zakłada się, że użytkownik <strong>nigdy nie naciska więcej niż jednego przycisku jednocześnie</strong> — w przypadku wykrycia wielu sygnałów wejściowych jednocześnie, układ nie podejmuje żadnej akcji.</p>
+</li>
+<li>
+<p>Naciśnięcie przycisku interpretowane jest jako <strong>impuls trwający jeden cykl zegara</strong> (impulsowy sygnał wysokiego poziomu, podobnie jak w przypadku typowego przycisku fizycznego).</p>
+</li>
+<li>
+<p>Dodatkowo, naciśnięcie przycisków <code>NEXT</code> lub <code>PREVIOUS</code> powoduje również wznowienie odtwarzania, jeśli wcześniej muzyka była zatrzymana.</p>
+</li>
+</ul>
+<h2 id="projekt-automatu-alternatywna-koncepcja">Projekt Automatu (Alternatywna Koncepcja) </h2>
+<p>W trakcie projektowania rozważaliśmy kilka możliwych podejść do realizacji zadania. Jedną z alternatywnych koncepcji było wykorzystanie <strong>dwóch osobnych automatów</strong>: jednego do obsługi odtwarzania muzyki, drugiego do zarządzania numerem utworu (ścieżkami).</p>
+<h3 id="automat-do-obsługi-muzyki">Automat do obsługi muzyki </h3>
+<p><img src="./assets-new/schemat_alt_1.png" alt="image"></p>
+<h3 id="automat-do-obsługi-ścieżek">Automat do obsługi ścieżek </h3>
+<p><img src="./assets-new/schemat_alt_2.png" alt="image"></p>
+<p>Choć podejście to pozwalało na czytelne rozdzielenie funkcji, ostatecznie zrezygnowaliśmy z niego — zgodnie z treścią zadania wymagane było użycie <strong>pojedynczego automatu</strong>. W dalszej części opisujemy implementację, którą finalnie przyjęliśmy.</p>
+<h2 id="projekt-automatu-finalna-koncepcja">Projekt automatu (finalna koncepcja) </h2>
+<p>W finalnej wersji projektu zdecydowaliśmy się na reprezentację stanu odtwarzacza MP3 za pomocą <strong>trzybitowej liczby</strong>.</p>
+<ul>
+<li><strong>Najstarszy bit</strong> przechowuje informację o tym, czy muzyka jest aktualnie <strong>odtwarzana (1)</strong>, czy <strong>zatrzymana (0)</strong>.</li>
+<li><strong>Dwa młodsze bity</strong> odpowiadają za <strong>numer aktualnego utworu</strong> (od 0 do 3).</li>
+</ul>
+<p><img src="./assets-new/schemat_bit.png" alt="image"></p>
+<p>Dzięki takiej strukturze automat posiada łącznie <strong>8 unikalnych stanów</strong>, które opisują zarówno status odtwarzania, jak i aktualny utwór. Przejścia między stanami są determinowane przez sygnały z przycisków: <code>PLAY</code>, <code>STOP</code>, <code>NEXT</code>, <code>PREVIOUS</code>.</p>
+<p>Automat został zaprojektowany tak, aby:</p>
+<ul>
+<li>Wciśnięcie <code>NEXT</code> lub <code>PREVIOUS</code> powodowało przejście do odpowiedniego utworu.</li>
+<li>Jeżeli muzyka była zatrzymana, to po zmianie utworu <strong>automatycznie następuje wznowienie odtwarzania</strong>.</li>
+<li>Utwory tworzą <strong>cykl zamknięty</strong>, co oznacza możliwość przechodzenia z końca na początek i odwrotnie, np. <code>00 ➜ 11</code> oraz <code>11 ➜ 00</code>.</li>
+</ul>
+<hr>
+<h3 id="pełny-schemat-automatu">Pełny schemat automatu: </h3>
+<p><img src="./assets-new/schemat_full.png" alt="image"></p>
+<h3 id="przejścia-dla-przycisku-next">Przejścia dla przycisku <code>NEXT</code>: </h3>
+<p><img src="./assets-new/schemat_next.png" alt="image"></p>
+<h3 id="przejścia-dla-przycisku-previous">Przejścia dla przycisku <code>PREVIOUS</code>: </h3>
+<p><img src="./assets-new/schemat_prev.png" alt="image"></p>
+<h2 id="koncepcja-schematu-układu">Koncepcja Schematu Układu </h2>
+<p>Korzystając z wcześniej przygotowanych projektów Automatu stworzyliśmy układ okreslający potrzebne nam komponenty oraz ich działanie. Jest to nic innego niż teoretyczny sposób na rozwiązanie zadania, który w następnych krokach zrealizowaliśmy. Schemat wygląda następująco:</p>
+<h3 id="konceptowy-układ-z-komponentami">Konceptowy Układ z komponentami </h3>
+<p><img src="./assets-new/uklad_schemat.png" alt="image"></p>
+<h3 id="wyjaśnienie-działania-układu">Wyjaśnienie działania układu </h3>
+<p>Wejścia <code>NEXT</code>, <code>PREV</code>, <code>PLAY</code>, <code>STOP</code> to po prostu <strong>przyciski</strong>, które w obecnej implementacji mają formę <strong>przełączników dwustanowych</strong> (mogą przyjmować wartość <code>0</code> lub <code>1</code>). Aby zasymulować rzeczywiste zachowanie przycisku (czyli krótkiego impulsu), zastosowaliśmy dodatkowy komponent — <code>INPUT PARSER</code>. Słuzy on również do blokowania sygnału w przypadku gdy użytkownik wciśnie więcej niż jeden przycisk.</p>
+<p>W celu rozwiania wątpliwości — założyliśmy, że do implementacji modułu <code>COUNTER</code> wykorzystamy przerzutniki typu T jako bazowe elementy pamięci. Dzięki nim możliwe będzie proste zliczanie oraz zmiana stanu układu przy kolejnych impulsach.</p>
+<p>Poniżej znajduje się schemat przykładowej realizacji takiego licznika z przerzutnikami T:</p>
+<p><img src="./assets-new/mp3-controler.png" alt="image"></p>
+<p>Zmienne T sterują zmianą konkretnych bitów, natomiast zmienne Q odpowiadają za przekazywanie informacji o aktualnym stanie układu.</p>
+<h4 id="komponent-input-parser">Komponent <code>INPUT PARSER</code> </h4>
+<p>Ten moduł odpowiada za przetwarzanie sygnałów wejściowych z przycisków i składa się z dwóch podkomponentów:</p>
+<ul>
+<li>
+<p><strong><code>IMPULSE DETECTOR</code></strong><br>
+Odpowiada za konwersję sygnału trwale wysokiego (<code>1</code>) na <strong>pojedynczy impuls</strong>, który trwa maksymalnie <strong>jeden cykl zegara</strong>.</p>
+</li>
+<li>
+<p><strong><code>LOGIC</code></strong><br>
+Zapewnia, że <strong>w danym cyklu aktywny może być tylko jeden przycisk</strong>. W przypadku wykrycia więcej niż jednego aktywnego wejścia, żaden sygnał nie jest przekazywany dalej — zapobiega to niepożądanym reakcjom automatu.</p>
+</li>
+</ul>
+<h4 id="komponent-mp3-logic">Komponent <code>MP3 LOGIC</code> </h4>
+<p>Otrzymuje przetworzone sygnały z <code>INPUT PARSERA</code> i analizuje je, generując trzy sygnały sterujące: <code>T2</code>, <code>T1</code>, <code>T0</code>. Każdy z nich informuje, <strong>czy dany bit stanu powinien zostać zmieniony</strong>:</p>
+<ul>
+<li><code>T2</code> — odnosi się do <strong>najstarszego bitu</strong> (odtwarzanie muzyki),</li>
+<li><code>T1</code>, <code>T0</code> — odpowiadają za numer utworu (2-bitowy licznik).</li>
+</ul>
+<h4 id="komponent-counter">Komponent <code>COUNTER</code> </h4>
+<p>Na podstawie sygnałów <code>T2</code>, <code>T1</code>, <code>T0</code>, licznik zmienia swój aktualny stan i generuje nowe wartości wyjściowe: <code>Q2</code>, <code>Q1</code>, <code>Q0</code>. Są to aktualne bity stanu automatu:</p>
+<ul>
+<li><code>Q2</code> — informacja o tym, czy muzyka jest odtwarzana (<code>1</code>) czy zatrzymana (<code>0</code>),</li>
+<li><code>Q1</code>, <code>Q0</code> — aktualny numer odtwarzanego utworu.</li>
+</ul>
+<blockquote>
+<p>Warto zauważyć, że cyfry w nazwach zmiennych <code>T</code> i <code>Q</code> oznaczają <strong>pozycję bitu</strong>:</p>
+<ul>
+<li><code>T2</code> i <code>Q2</code> — najstarszy bit (odtwarzanie),</li>
+<li><code>T1</code> i <code>Q1</code> — pierwszy bit numeru utworu,</li>
+<li><code>T0</code> i <code>Q0</code> — najmłodszy bit numeru utworu.</li>
+</ul>
+</blockquote>
+<h4 id="wizualizacja-wyjść">Wizualizacja wyjść </h4>
+<p>Sygnały <code>Q1</code> i <code>Q0</code>, reprezentujące numer utworu, są przesyłane do <strong>wyświetlacza 4-bitowego</strong>, z którego wykorzystujemy jedynie <strong>dwa najmłodsze bity</strong>.<br>
+Sygnał <code>Q2</code>, informujący o stanie odtwarzania, steruje <strong>diodą LED podpisaną <code>PLAYING</code></strong> — dioda świeci, gdy muzyka jest odtwarzana.</p>
+<h2 id="analiza-logiki-sterującej">Analiza logiki sterującej </h2>
+<p>Nasz układ ma dwa komponenty logiczne które wymagają analizy pojedyńczych wartości logicznych. Są to <code>INPUT PARSER ➜ LOGIC</code> oraz <code>MP3 LOGIC</code>. Najpierw przedstawimy analizę wartości logicznych <code>INPUT PARSERA</code>, ponieważ od niego zależą wartości logiczne otrzymane w <code>MP3 LOGIC</code>.</p>
+<h3 id="input-parser--logic">INPUT PARSER ➜ LOGIC </h3>
+<p>Projektowanie tego komponentu rozpoczęliśmy od analizy tablicy wartości logicznych. Układ otrzymuje cztery sygnały wejściowe: <code>NEXT</code>, <code>PREVIOUS</code>, <code>PLAY</code> oraz <code>STOP</code>.</p>
+<p>Założeniem działania komponentu <code>LOGIC</code> jest to, że <strong>wyjście może być aktywne tylko wtedy, gdy dokładnie jeden z sygnałów wejściowych ma wartość <code>1</code></strong>. W przeciwnym wypadku, gdy aktywne są dwa lub więcej wejść, żadne wyjście nie zostaje wygenerowane.</p>
+<h4 id="tabela-wartości-logicznych">Tabela wartości logicznych </h4>
+<img src="./assets-new/logika-input-parser.jpg" style="max-height: 900px">
+<p>Na podstawie analizy uzyskaliśmy następujące zależności logiczne dla sygnałów wyjściowych: <code>NEXT_O</code>, <code>PREV_O</code>, <code>PLAY_O</code>, <code>STOP_O</code>:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>NEXT_O  = ¬(P + PL + ST) · N
+PREV_O  = ¬(N + PL + ST) · P
+PLAY_O  = ¬(N + P + ST) · PL
+STOP_O  = ¬(N + P + PL) · ST
+</code></pre><p>Gdzie:</p>
+<ul>
+<li><code>N</code> = <code>NEXT</code></li>
+<li><code>P</code> = <code>PREVIOUS</code></li>
+<li><code>PL</code> = <code>PLAY</code></li>
+<li><code>ST</code> = <code>STOP</code></li>
+</ul>
+<blockquote>
+<p>Równania można też przedstawić z użyciem operatora NAND lub NOR w zależności od dalszej implementacji w logice sprzętowej.<br>
+<strong>W naszym projekcie zdecydowaliśmy się jednak na zastosowanie pełnych, nieupraszczanych wyrażeń logicznych</strong> — co ułatwia ich analizę oraz implementację na etapie projektowania układu.</p>
+</blockquote>
+<p>Ostateczne sygnały <code>NEXT_O</code>, <code>PREV_O</code>, <code>PLAY_O</code>, <code>STOP_O</code> są przekazywane dalej do komponentu <code>MP3 LOGIC</code>, który na ich podstawie decyduje o zmianie stanu odtwarzacza.</p>
+<h3 id="mp3-logic">MP3 LOGIC </h3>
+<p>Projektowanie tego komponentu rozpoczęliśmy od analizy tablicy wartości logicznych. Układ otrzymuje siedem sygnałów wejściowych:</p>
+<ul>
+<li><code>Q2, Q1, Q0</code> – 3-bitowa liczba określająca <strong>obecny stan odtwarzacza MP3</strong></li>
+<li><code>NEXT, PREV, PLAY, STOP</code> – sygnały wejściowe przekazane z komponentu <strong>INPUT PARSER</strong></li>
+</ul>
+<p>W celu uproszczenia projektu oraz zmniejszenia liczby rekordów analizowanych w tabelach prawdy, zdecydowaliśmy się na <strong>pominięcie przypadków, w których więcej niż jeden przycisk wejściowy ma wartość <code>1</code></strong>.</p>
+<p>Pominięcie to jest uzasadnione, ponieważ w działającym układzie taka sytuacja <strong>nie może wystąpić</strong> – komponent <code>INPUT PARSER</code> gwarantuje, że <strong>aktywny może być tylko jeden sygnał wejściowy na raz</strong>.</p>
+<p>W tabeli prawdy zastosowano oznaczenia <code>AQ2, AQ1, AQ0</code>, które odpowiadają wartościom bitów stanu po zareagowaniu na naciśnięcie przycisku.</p>
+<p>Opisane zostały również sekcje wystepujące w tabeli. Oznaczenie pod tytułem <code>Liczba, Przycisk</code> np <code>1 NEXT</code> opisuje stan czy muzyka gra i wciśnięty przycisk</p>
+<p>Dla przejrzystości analiz, każda sekcja tabeli została oznaczona etykietą w formacie Liczba, Przycisk (np. 1 NEXT). Pierwszy człon informuje, czy muzyka była odtwarzana (1) lub zatrzymana (0), a drugi wskazuje, który przycisk został naciśnięty.</p>
+<h4 id="logika-dla-next-i-prev">Logika dla <code>NEXT</code> i <code>PREV</code>: </h4>
+<img src="./assets-new/logika-mp3-next-prev.jpg" style="max-height: 800px">
+<h4 id="logika-dla-play-i-stop">Logika dla <code>PLAY</code> i <code>STOP</code>: </h4>
+<img src="./assets-new/logika-mp3-play-stop.jpg" style="max-height: 800px">
+<hr>
+<h3 id="podział-logiki-mp3-na-komponenty-funkcjonalne">Podział logiki MP3 na komponenty funkcjonalne </h3>
+<p>Aby uprościć proces projektowania oraz analizę logiczną, zdecydowaliśmy się podzielić logikę komponentu <code>MP3 LOGIC</code> na cztery osobne bloki odpowiadające każdemu z możliwych sygnałów wejściowych (<code>NEXT</code>, <code>PREV</code>, <code>PLAY</code>, <code>STOP</code>).</p>
+<p>Każdy z tych bloków — oznaczonych jako <code>T_NEXT</code>, <code>T_PREV</code>, <code>T_PLAY</code>, <code>T_STOP</code> — jest aktywny <strong>wyłącznie wtedy</strong>, gdy odpowiadający mu sygnał wejściowy ma wartość <code>1</code>. Dzięki temu możemy osobno analizować i projektować logikę zmian bitów tylko dla jednego aktywnego przycisku, co znacząco upraszcza zarówno tablice Karnaugha, jak i późniejszą implementację układu.</p>
+<p>W kolejnych podsekcjach przedstawiamy osobno logikę każdego z tych komponentów.</p>
+<h4 id="logika-t_next">Logika <code>T_NEXT</code> </h4>
+<img src="./assets-new/mp3-logic-next.png" style="max-height: 1000px">
+<h4 id="logika-t_prev">Logika <code>T_PREV</code> </h4>
+<img src="./assets-new/mp3-logic-prev.png" style="max-height: 1000px">
+<h4 id="logika-t_play">Logika <code>T_PLAY</code> </h4>
+<img src="./assets-new/mp3-logic-play.png" style="max-height: 1000px">
+<h4 id="logika-t_stop">Logika <code>T_STOP</code> </h4>
+<img src="./assets-new/mp3-logic-stop.png" style="max-height: 1000px">
+<p>Każdy z powyższych komponentów generuje niezależnie sygnały wyjściowe <code>T2, T1, T0</code>, które odpowiadają za ewentualną zmianę odpowiednich bitów stanu (<code>Q2, Q1, Q0</code>). Ponieważ tylko jeden z komponentów może być aktywny w danym cyklu (zgodnie z działaniem <code>INPUT PARSER</code>), sygnały <code>T2, T1, T0</code> z każdego bloku są <strong>łączone logiczną operacją OR</strong>.</p>
+<p>W rezultacie końcowe wartości <code>T2, T1, T0</code> są wynikiem działania <strong>jednego aktywnego bloku logicznego</strong>, co upraszcza konstrukcję układu i umożliwia niezależne projektowanie każdego komponentu.</p>
+<h2 id="implementacja">Implementacja </h2>
+<p>Po zaprojektowaniu i analizie logiki sterującej przeszliśmy do implementacji kompletnego układu odtwarzacza MP3. W tej części przedstawiamy strukturę całego systemu oraz sposób, w jaki poszczególne komponenty zostały połączone w spójną i działającą całość.</p>
+<p>Realizacja zadania została przeprowadzona w programie <strong>Multisim v14.2</strong>.</p>
+<p>Poniżej prezentujemy główny schemat układu wraz z porównaniem do zaprojektowanego wcześniej modelu teoretycznego. Opis działania poszczególnych komponentów został przedstawiony we wcześniejszych sekcjach — poniżej skupiamy się na ich wzajemnych połączeniach i zastosowanych uproszczeniach nazw.</p>
+<hr>
+<h3 id="finalny-układ">Finalny układ </h3>
+<p><img src="./assets-new/uklad.png" alt="image"></p>
+<h3 id="komponent-input-parser-1">Komponent <code>INPUT PARSER</code> </h3>
+<p><img src="./assets-new/input-parser-uklad.png" alt="image"></p>
+<h3 id="wcześniej-zaprojektowany-schemat-dla-porównania">Wcześniej zaprojektowany schemat (dla porównania) </h3>
+<p><img src="./assets-new/uklad_schemat.png" alt="image"></p>
+<hr>
+<p>Finalny układ nie odbiega znacząco od zaplanowanego wcześniej schematu. Wprowadziliśmy jednak kilka drobnych zmian nazewniczych dla większej przejrzystości.</p>
+<h2 id="przedstawienie-komponentów">Przedstawienie komponentów </h2>
+<p>Poniżej znajduje się schematyczne przedstawienie każdego z głównych komponentów oraz uzasadnienie ich działania. Komponenty są omówione w kolejności odpowiadającej ich przetwarzaniu sygnału — od momentu naciśnięcia przycisku aż do prezentacji danych na wyjściu.</p>
+<hr>
+<h3 id="input-parser--impulse-detector">Input Parser ➜ Impulse Detector </h3>
+<p>Układ <code>Impulse Detector</code> odpowiada za przekształcenie sygnału z przycisków (który w symulacji ma postać stałego stanu wysokiego <code>1</code>) w impuls trwający <strong>dokładnie jeden cykl zegara</strong>.</p>
+<p><img src="./assets-new/input-detector.png" alt="image"></p>
+<p>Działanie układu opiera się na detekcji <strong>zbocza narastającego</strong> sygnału — czyli momentu, w którym stan zmienia się z <code>0</code> na <code>1</code>. W tym celu zastosowano <strong>przerzutniki typu D</strong>, które zapamiętują poprzedni stan każdego wejścia (<code>NEXT</code>, <code>PREV</code>, <code>PLAY</code>, <code>STOP</code>).</p>
+<p>Dla każdego wejścia zastosowano osobny tor:</p>
+<ul>
+<li>Sygnał wejściowy trafia na wejście <code>D</code> przerzutnika, a jego wyjście <code>Q</code> reprezentuje poprzedni stan.</li>
+<li>Wyjście <code>Q</code> podawane jest do bramki NOT, której wynik (<code>¬Q</code>) informuje, czy wcześniej był stan niski.</li>
+<li>Jednocześnie bieżący sygnał jest podawany do bramki AND razem z zanegowanym poprzednim stanem.</li>
+<li>W wyniku tego bramka AND wygeneruje impuls (<code>1</code>) tylko w chwili zmiany z <code>0</code> na <code>1</code>.</li>
+</ul>
+<p>Dzięki temu sygnał z przycisku zostaje przekształcony w <strong>krótkotrwały impuls</strong> o długości jednego cyklu zegara, co znacząco ułatwia dalsze przetwarzanie sygnałów i eliminuje potencjalne problemy z długimi stanami wysokimi.</p>
+<hr>
+<h3 id="input-parser--input-logic">Input Parser ➜ Input Logic </h3>
+<p>Komponent <code>Input Logic</code> odpowiedzialny jest za dopuszczenie tylko <strong>jednego aktywnego sygnału wejściowego</strong> w danym cyklu. Jeśli użytkownik naciśnie więcej niż jeden przycisk naraz, układ nie przepuszcza żadnego z nich, zapewniając jednoznaczność i stabilność działania.</p>
+<p><img src="./assets-new/input-logic.png" alt="image"></p>
+<p>Zastosowana logika wynika bezpośrednio z wcześniej przedstawionej analizy funkcjonalnej:</p>
+<img src="./assets-new/logika-input-parser.jpg" style="max-height: 800px">
+<p>Na podstawie tej tabeli zostały stworzone wyrażenia logiczne dla każdego wyjścia (<code>NEXT_O</code>, <code>PREV_O</code>, <code>PLAY_O</code>, <code>STOP_O</code>). Każde z tych wyjść aktywuje się <strong>tylko wtedy</strong>, gdy dany przycisk jest wciśnięty, a pozostałe mają wartość <code>0</code>. Taka konstrukcja zapobiega błędnej interpretacji, gdyby użytkownik próbował aktywować kilka funkcji jednocześnie.</p>
+<hr>
+<h3 id="logic">Logic </h3>
+<p>Komponent <code>Logic</code> odpowiedzialny jest za przetworzenie danych wejściowych z przycisków <code>NEXT</code>, <code>PREV</code>, <code>PLAY</code>, <code>STOP</code> na sygnały sterujące <code>T2</code>, <code>T1</code>, <code>T0</code>, które wskazują, <strong>które bity stanu powinny ulec zmianie</strong>.</p>
+<p><img src="./assets-new/logic.png" alt="image"></p>
+<p>W ramach tego podukładu zaimplementowano wcześniej zaprojektowane komponenty <code>T_NEXT</code>, <code>T_PREV</code>, <code>T_PLAY</code>, <code>T_STOP</code>, dla których wyznaczone zostały osobne równania logiczne. Każdy z tych podukładów jest aktywny tylko w momencie, gdy odpowiadający mu przycisk jest aktywny (<code>1</code>), dzięki czemu logika została uproszczona i rozdzielona na osobne przypadki.</p>
+<p>Poniżej przedstawiono zestawienie schematów tych podukładów oraz odpowiadających im tabel Karnaugh:</p>
+<hr>
+<h4 id="podukład-t_next">Podukład <code>T_NEXT</code> </h4>
+<p>Schemat układu:<br>
+<img src="./assets-new/logic-t-next.png" alt="image"></p>
+<p>Tabela Karnaugh:<br>
+<img src="./assets-new/mp3-logic-next.png" style="max-height: 1000px"></p>
+<hr>
+<h4 id="podukład-t_prev">Podukład <code>T_PREV</code> </h4>
+<p>Schemat układu:<br>
+<img src="./assets-new/logic-t-prev.png" alt="image"></p>
+<p>Tabela Karnaugh:<br>
+<img src="./assets-new/mp3-logic-prev.png" style="max-height: 1000px"></p>
+<hr>
+<h4 id="podukład-t_play">Podukład <code>T_PLAY</code> </h4>
+<p>Schemat układu:<br>
+<img src="./assets-new/logic-t-play.png" alt="image"></p>
+<p>Tabela Karnaugh:<br>
+<img src="./assets-new/mp3-logic-play.png" style="max-height: 1000px"></p>
+<hr>
+<h4 id="podukład-t_stop">Podukład <code>T_STOP</code> </h4>
+<p>Schemat układu:<br>
+<img src="./assets-new/logic-t-stop.png" alt="image"></p>
+<p>Tabela Karnaugh:<br>
+<img src="./assets-new/mp3-logic-stop.png" style="max-height: 1000px"></p>
+<hr>
+<h3 id="mp3-controler">MP3 Controler </h3>
+<p>Komponent <code>MP3 Controler</code> odpowiedzialny jest za <strong>przechowywanie aktualnego stanu odtwarzacza MP3</strong>. Stan ten opisany jest za pomocą 3-bitowej liczby (<code>Q2, Q1, Q0</code>), gdzie najstarszy bit (<code>Q2</code>) informuje, czy muzyka jest aktualnie odtwarzana, natomiast dwa pozostałe (<code>Q1, Q0</code>) wskazują numer ścieżki.</p>
+<p>Układ został zrealizowany za pomocą trzech przerzutników typu T, które zmieniają swój stan zgodnie z wartościami <code>T2</code>, <code>T1</code>, <code>T0</code> wyznaczonymi przez moduł <code>Logic</code>.</p>
+<p><img src="./assets-new/mp3-controler.png" alt="image"></p>
+<hr>
+<p>Wszystkie wcześniej opisane komponenty, działając wspólnie, realizują funkcjonalność umożliwiającą wybór utworu oraz jego odtworzenie zgodnie z logiką przyjętą w projekcie.</p>
+<h4 id="finalny-schemat-realizujący-założone-zadanie">Finalny schemat realizujący założone zadanie </h4>
+<p><img src="./assets-new/uklad.png" alt="image"></p>
+<h2 id="układ-testowy">Układ testowy </h2>
+<p>W celu weryfikacji poprawności działania logiki układu, opracowany został uproszczony układ testowy. Skupiliśmy się w nim na przetestowaniu fragmentów odpowiedzialnych za zmianę stanu utworu oraz jego odtwarzanie i zatrzymywanie — czyli logiki komponentów <code>LOGIC</code>, <code>T_NEXT</code>, <code>T_PREV</code>, <code>T_PLAY</code>, <code>T_STOP</code>.</p>
+<p>Na potrzeby testów:</p>
+<ul>
+<li><strong>Komponent <code>MP3 CONTROLER</code></strong>, odpowiedzialny za przechowywanie aktualnego stanu (<code>Q2, Q1, Q0</code>), został <strong>zastąpiony ręcznie ustawianymi sygnałami wejściowymi</strong>, co pozwoliło na precyzyjne testowanie konkretnych przypadków logicznych.</li>
+<li><strong>Komponent <code>INPUT PARSER</code></strong> został <strong>uproszczony</strong> — pominięto część odpowiedzialną za detekcję impulsów, skupiając się wyłącznie na reakcjach układu na konkretne, pojedyncze sygnały wejściowe (<code>NEXT</code>, <code>PREV</code>, <code>PLAY</code>, <code>STOP</code>).</li>
+<li><strong>Sygnały <code>T2, T1, T0</code></strong>, będące wynikiem działania logiki, zostały <strong>zmapowane bezpośrednio na linie <code>Q2, Q1, Q0</code></strong> dzięki komponentowi <code>Logic Converter</code>, co pozwala zasymulować zachowanie przerzutników typu T oraz obserwować zmiany stanu układu na podstawie ich aktywacji.</li>
+</ul>
+<p>Tak zbudowany układ pozwolił sprawdzić, czy logika w każdej sytuacji generuje poprawne sygnały zmiany stanu i czy odpowiadają one oczekiwanym zachowaniom systemu.</p>
+<h4 id="realizacja-układu-testowego">Realizacja układu testowego </h4>
+<p><img src="./assets-new/uklad-testowy.png" alt="image"></p>
+<h4 id="co-umożliwia-układ-testowy">Co umożliwia układ testowy? </h4>
+<p>Układ testowy pozwala na weryfikację poprawności działania poszczególnych elementów logicznych systemu. W przypadku wystąpienia błędu, system zwraca informacje, które umożliwiają dokładną analizę przyczyn nieprawidłowości, dzięki czemu diagnostyka jest znacznie prostsza.</p>
+<p>Przykładowe sygnały zwracane do analizatorów stanów logicznych przedstawiono poniżej:</p>
+<p><img src="./assets-new/stan-logiczny.png" alt="image"></p>
+<p>Testowanie przebiega cyklicznie, poprzez generowanie wartości wejściowych <code>NEXT</code>, <code>PREV</code>, <code>PLAY</code>, <code>STOP</code>, a także aktualnego stanu <code>Q2</code>, <code>Q1</code>, <code>Q0</code> oraz oczekiwanych wartości <code>EX_Q2</code>, <code>EX_Q1</code>, <code>EX_Q0</code>, które są dostarczane przez generator słów.</p>
+<p>Przykładowe dane z generatora słów:</p>
+<p><img src="./assets-new/word-generator.png" alt="image"></p>
+<hr>
+<h3 id="opis-działania-komponentów-układu-testowego">Opis działania komponentów układu testowego </h3>
+<p>Część komponentów wykorzystywanych w układzie testowym jest identyczna jak w podstawowym projekcie, dlatego ich opis zostanie pominięty. Jednakże, dla potrzeb testów konieczne było zaprojektowanie kilku nowych modułów.</p>
+<hr>
+<h3 id="logic-converter">Logic Converter </h3>
+<p><img src="./assets-new/logic-converter.png" alt="image"></p>
+<p>Komponent <code>Logic Converter</code> realizuje przekształcenie sygnałów <code>T</code> na odpowiadające im zmiany stanów <code>Q</code>, zgodnie z równaniem:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>Q_OUT = ¬Q · T + Q · ¬T
+</code></pre><img src="./assets-new/T-logic.png" style="max-height: 160px">
+<p>Równanie to odpowiada działaniu przerzutnika typu T i upraszcza się do operacji XOR:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>Q_OUT = Q ⊕ T
+</code></pre><p>Dzięki temu możliwa jest symulacja zmiany stanu bitów na podstawie sygnałów <code>T</code> bez fizycznej implementacji przerzutników, co upraszcza konstrukcję układu testowego i przyspiesza weryfikację logiki.</p>
+<hr>
+<h3 id="tester">Tester </h3>
+<p>Moduł <code>Tester</code> odpowiada za porównywanie wartości faktycznych z wartościami oczekiwanymi oraz sygnalizowanie wystąpienia błędów. W przypadku różnicy między aktualnym stanem (<code>Q2, Q1, Q0</code>) a wartością oczekiwaną (<code>EX_Q2, EX_Q1, EX_Q0</code>), układ generuje odpowiedni sygnał błędu.</p>
+<p>Układ rozróżnia dwa typy błędów:</p>
+<ul>
+<li><strong>Błędy lokalne</strong> — dotyczą pojedynczych bitów <code>Q2</code>, <code>Q1</code>, <code>Q0</code> i są sygnalizowane indywidualnymi diodami LED na module testowym.</li>
+<li><strong>Błąd globalny</strong> — aktywowany przy pierwszym wykrytym błędzie i pozostaje aktywny do zakończenia testu, co pozwala na szybkie wykrycie problemu w całym systemie.</li>
+</ul>
+<p>Wszystkie sygnały błędów są dostępne na wyjściach modułu, co umożliwia ich podłączenie do systemów monitorujących oraz dalszą analizę.</p>
+<p><img src="./assets-new/tester.png" alt="image"></p>
+<hr>
+<h3 id="tester--err-detector">Tester ➜ ERR Detector </h3>
+<p>Moduł <code>ERR Detector</code> odpowiada za porównanie wartości oczekiwanych z rzeczywistymi dopiero w momencie wykrycia spadku sygnału na wejściu <code>READY</code>. Wejście to sygnalizuje gotowość generatora słów, co oznacza, że wartości są stabilne i można je bezpiecznie wykorzystać do porównań.</p>
+<p>Wykrywanie spadku napięcia zostało zastosowane celowo, aby dać czas pozostałym komponentom na wykonanie swojej logiki i ustabilizowanie sygnałów. Dzięki temu unikamy błędów wynikających z opóźnień i desynchronizacji pomiędzy elementami systemu.</p>
+<p>Działanie <code>ERR Detector</code> jest analogiczne do modułu <code>Impulse Detector</code>, jednak w przeciwieństwie do niego wykrywa <strong>spadek</strong> napięcia, podczas gdy <code>Impulse Detector</code> reaguje na jego wzrost.</p>
+<p><img src="./assets-new/error-detector.png" alt="image"></p>
+<h2 id="inne-zastosowania">Inne zastosowania </h2>
+<p>Projektowany układ może znaleźć zastosowanie także poza funkcją odtwarzacza MP3. Świetnie sprawdziłby się jako kontroler wyświetlania treści reklamowych na ekranie telewizora lub monitora. Mając do dyspozycji cztery różne reklamy, układ umożliwiałby wybór i odtwarzanie jednej z nich.</p>
+<p>Dodatkowo, możliwe jest rozbudowanie systemu o funkcję automatycznej zmiany reklam, które wówczas byłyby wyświetlane kolejno, jedna po drugiej, co pozwoliłoby na dynamiczne i efektywne zarządzanie prezentacją treści.</p>
+<p><img src="./assets-new/zastosowanie.png" alt="image"></p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
