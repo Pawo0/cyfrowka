@@ -43,7 +43,7 @@ W trakcie projektowania rozważaliśmy kilka możliwych podejść do realizacji 
 ### Automat do obsługi ścieżek
 ![image](./assets-new/schemat_alt_2.png)
 
-Choć podejście to pozwalało na czytelne rozdzielenie funkcji, ostatecznie zrezygnowaliśmy z niego — zgodnie z treścią zadania wymagane było użycie **pojedynczego automatu**. W dalszej części opisujemy implementację, którą finalnie przyjęliśmy.
+Pomimo że podejście to umożliwiało przejrzysty podział funkcji, ostatecznie zostało porzucone na rzecz bardziej interesującej i rozbudowanej implementacji.s
 
 ## Projekt automatu (finalna koncepcja)
 
@@ -173,9 +173,7 @@ Pominięcie to jest uzasadnione, ponieważ w działającym układzie taka sytuac
 
 W tabeli prawdy zastosowano oznaczenia `AQ2, AQ1, AQ0`, które odpowiadają wartościom bitów stanu po zareagowaniu na naciśnięcie przycisku.
 
-Opisane zostały również sekcje wystepujące w tabeli. Oznaczenie pod tytułem `Liczba, Przycisk` np `1 NEXT` opisuje stan czy muzyka gra i wciśnięty przycisk
-
-Dla przejrzystości analiz, każda sekcja tabeli została oznaczona etykietą w formacie Liczba, Przycisk (np. 1 NEXT). Pierwszy człon informuje, czy muzyka była odtwarzana (1) lub zatrzymana (0), a drugi wskazuje, który przycisk został naciśnięty.
+Dla przejrzystości analiz, każda sekcja tabeli została oznaczona etykietą w formacie Liczba, Przycisk `(np. 1 NEXT)`. Pierwszy człon informuje, czy muzyka była odtwarzana `(1)` lub zatrzymana `(0)`, a drugi wskazuje, który przycisk został naciśnięty.
 
 #### Logika dla `NEXT` i `PREV`:
 <img src="./assets-new/logika-mp3-next-prev.jpg" style="max-height: 800px">
@@ -201,6 +199,9 @@ W kolejnych podsekcjach przedstawiamy osobno logikę każdego z tych komponentó
 
 <img src="./assets-new/mp3-logic-prev.png" style="max-height: 1000px">
 
+#### Logika dla `NEXT` i `PREV` do porównania:
+<img src="./assets-new/logika-mp3-next-prev.jpg" style="max-height: 800px">
+
 #### Logika `T_PLAY`
 
 <img src="./assets-new/mp3-logic-play.png" style="max-height: 1000px">
@@ -208,6 +209,9 @@ W kolejnych podsekcjach przedstawiamy osobno logikę każdego z tych komponentó
 #### Logika `T_STOP`
 
 <img src="./assets-new/mp3-logic-stop.png" style="max-height: 1000px">
+
+#### Logika dla `PLAY` i `STOP` do porównania:
+<img src="./assets-new/logika-mp3-play-stop.jpg" style="max-height: 800px">
 
 Każdy z powyższych komponentów generuje niezależnie sygnały wyjściowe `T2, T1, T0`, które odpowiadają za ewentualną zmianę odpowiednich bitów stanu (`Q2, Q1, Q0`). Ponieważ tylko jeden z komponentów może być aktywny w danym cyklu (zgodnie z działaniem `INPUT PARSER`), sygnały `T2, T1, T0` z każdego bloku są **łączone logiczną operacją OR**. 
 

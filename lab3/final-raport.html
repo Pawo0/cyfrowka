@@ -66,7 +66,7 @@
 <p><img src="./assets-new/schemat_alt_1.png" alt="image"></p>
 <h3 id="automat-do-obsługi-ścieżek">Automat do obsługi ścieżek </h3>
 <p><img src="./assets-new/schemat_alt_2.png" alt="image"></p>
-<p>Choć podejście to pozwalało na czytelne rozdzielenie funkcji, ostatecznie zrezygnowaliśmy z niego — zgodnie z treścią zadania wymagane było użycie <strong>pojedynczego automatu</strong>. W dalszej części opisujemy implementację, którą finalnie przyjęliśmy.</p>
+<p>Pomimo że podejście to umożliwiało przejrzysty podział funkcji, ostatecznie zostało porzucone na rzecz bardziej interesującej i rozbudowanej implementacji.s</p>
 <h2 id="projekt-automatu-finalna-koncepcja">Projekt automatu (finalna koncepcja) </h2>
 <p>W finalnej wersji projektu zdecydowaliśmy się na reprezentację stanu odtwarzacza MP3 za pomocą <strong>trzybitowej liczby</strong>.</p>
 <ul>
@@ -166,8 +166,7 @@ STOP_O  = ¬(N + P + PL) · ST
 <p>W celu uproszczenia projektu oraz zmniejszenia liczby rekordów analizowanych w tabelach prawdy, zdecydowaliśmy się na <strong>pominięcie przypadków, w których więcej niż jeden przycisk wejściowy ma wartość <code>1</code></strong>.</p>
 <p>Pominięcie to jest uzasadnione, ponieważ w działającym układzie taka sytuacja <strong>nie może wystąpić</strong> – komponent <code>INPUT PARSER</code> gwarantuje, że <strong>aktywny może być tylko jeden sygnał wejściowy na raz</strong>.</p>
 <p>W tabeli prawdy zastosowano oznaczenia <code>AQ2, AQ1, AQ0</code>, które odpowiadają wartościom bitów stanu po zareagowaniu na naciśnięcie przycisku.</p>
-<p>Opisane zostały również sekcje wystepujące w tabeli. Oznaczenie pod tytułem <code>Liczba, Przycisk</code> np <code>1 NEXT</code> opisuje stan czy muzyka gra i wciśnięty przycisk</p>
-<p>Dla przejrzystości analiz, każda sekcja tabeli została oznaczona etykietą w formacie Liczba, Przycisk (np. 1 NEXT). Pierwszy człon informuje, czy muzyka była odtwarzana (1) lub zatrzymana (0), a drugi wskazuje, który przycisk został naciśnięty.</p>
+<p>Dla przejrzystości analiz, każda sekcja tabeli została oznaczona etykietą w formacie Liczba, Przycisk <code>(np. 1 NEXT)</code>. Pierwszy człon informuje, czy muzyka była odtwarzana <code>(1)</code> lub zatrzymana <code>(0)</code>, a drugi wskazuje, który przycisk został naciśnięty.</p>
 <h4 id="logika-dla-next-i-prev">Logika dla <code>NEXT</code> i <code>PREV</code>: </h4>
 <img src="./assets-new/logika-mp3-next-prev.jpg" style="max-height: 800px">
 <h4 id="logika-dla-play-i-stop">Logika dla <code>PLAY</code> i <code>STOP</code>: </h4>
@@ -181,10 +180,14 @@ STOP_O  = ¬(N + P + PL) · ST
 <img src="./assets-new/mp3-logic-next.png" style="max-height: 1000px">
 <h4 id="logika-t_prev">Logika <code>T_PREV</code> </h4>
 <img src="./assets-new/mp3-logic-prev.png" style="max-height: 1000px">
+<h4 id="logika-dla-next-i-prev-do-porównania">Logika dla <code>NEXT</code> i <code>PREV</code> do porównania: </h4>
+<img src="./assets-new/logika-mp3-next-prev.jpg" style="max-height: 800px">
 <h4 id="logika-t_play">Logika <code>T_PLAY</code> </h4>
 <img src="./assets-new/mp3-logic-play.png" style="max-height: 1000px">
 <h4 id="logika-t_stop">Logika <code>T_STOP</code> </h4>
 <img src="./assets-new/mp3-logic-stop.png" style="max-height: 1000px">
+<h4 id="logika-dla-play-i-stop-do-porównania">Logika dla <code>PLAY</code> i <code>STOP</code> do porównania: </h4>
+<img src="./assets-new/logika-mp3-play-stop.jpg" style="max-height: 800px">
 <p>Każdy z powyższych komponentów generuje niezależnie sygnały wyjściowe <code>T2, T1, T0</code>, które odpowiadają za ewentualną zmianę odpowiednich bitów stanu (<code>Q2, Q1, Q0</code>). Ponieważ tylko jeden z komponentów może być aktywny w danym cyklu (zgodnie z działaniem <code>INPUT PARSER</code>), sygnały <code>T2, T1, T0</code> z każdego bloku są <strong>łączone logiczną operacją OR</strong>.</p>
 <p>W rezultacie końcowe wartości <code>T2, T1, T0</code> są wynikiem działania <strong>jednego aktywnego bloku logicznego</strong>, co upraszcza konstrukcję układu i umożliwia niezależne projektowanie każdego komponentu.</p>
 <h2 id="implementacja">Implementacja </h2>
