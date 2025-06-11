@@ -49,7 +49,7 @@ begin
     process(clk)
     begin
         if rising_edge(clk) then
-            if btn_deb = '1' and btn_deb_reg = '0' then
+            if btn_deb = '0' and btn_deb_reg = '1' then
                 btn_out <= '1';
             else
                 btn_out <= '0';
